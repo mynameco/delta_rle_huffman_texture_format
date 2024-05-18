@@ -46,7 +46,7 @@ namespace DrhLib.Utility
 			lineV = new Color32[width];
 			lineHV = new Color32[width];
 
-			tasksState = new Task[channelCount, 3];
+			tasksState = new Task[channelCount, (int)DeltaKind.Count];
 
 			writersStateH = new IBitStreamWriter[channelCount];
 			writersStateV = new IBitStreamWriter[channelCount];

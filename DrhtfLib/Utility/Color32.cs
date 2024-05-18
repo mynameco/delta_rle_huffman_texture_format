@@ -6,6 +6,11 @@ namespace DrhLib.Utility
 	[StructLayout(LayoutKind.Explicit)]
 	public unsafe struct Color32
 	{
+		public const int Red = 0;
+		public const int Green = 1;
+		public const int Blue = 2;
+		public const int Alpha = 3;
+
 		[FieldOffset(0)]
 		public byte r;
 

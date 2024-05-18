@@ -56,10 +56,10 @@ namespace DrhLib.Utility
 			if (!DecodeChannels(reader, pixels, deltaKind, offset, lineIndex))
 				return false;
 
-			// TODO Декодируем, 
+			// Декодируем, 
 			DeltaDecodeChannels(pixels, deltaKind, offset);
 
-			// TODO А потом снова кодируем для статистики
+			// А потом снова кодируем для статистики
 			DeltaLineUtility.DeltaEncodeChannels(pixels, offset, width, prevLine, channelCount, lineH, lineV, lineHV);
 
 			if (useAsync)
@@ -118,10 +118,12 @@ namespace DrhLib.Utility
 							{
 								var algorithm = factory.Get((AlgorithmKind)tmpKind, deltaKind);
 
-								var currentLine = lineH;
-								if (deltaKind == DeltaKind.V)
+								Color32[] currentLine;
+								if (deltaKind == DeltaKind.H)
+									currentLine = lineH;
+								else if (deltaKind == DeltaKind.V)
 									currentLine = lineV;
-								else if (deltaKind == DeltaKind.HV)
+								else
 									currentLine = lineHV;
 
 								algorithm.UpdateTable(currentLine, tmpChannel, lineIndex, (AlgorithmKind)tmpKind);
@@ -144,10 +146,12 @@ namespace DrhLib.Utility
 				{
 					var algorithm = factory.Get((AlgorithmKind)kind, deltaKind);
 
-					var currentLine = lineH;
-					if (deltaKind == DeltaKind.V)
+					Color32[] currentLine;
+					if (deltaKind == DeltaKind.H)
+						currentLine = lineH;
+					else if (deltaKind == DeltaKind.V)
 						currentLine = lineV;
-					else if (deltaKind == DeltaKind.HV)
+					else
 						currentLine = lineHV;
 
 					algorithm.UpdateTable(currentLine, channel, lineIndex, (AlgorithmKind)kind);
@@ -169,8 +173,8 @@ namespace DrhLib.Utility
 					currentPrevLinePixel = pixels[indexPrevLineX];
 
 				var currentPixel = pixels[indexX];
-				currentPixel[0] += currentPixel[1];
-				currentPixel[2] += currentPixel[1];
+				currentPixel[Color32.Red] += currentPixel[Color32.Green];
+				currentPixel[Color32.Blue] += currentPixel[Color32.Green];
 
 				if (deltaKind == DeltaKind.H)
 				{
