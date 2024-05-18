@@ -1,6 +1,6 @@
-﻿using DdhtfLib.Utility;
-using DrhLib.Compress.Algorithms;
+﻿using DrhLib.Compress.Algorithms;
 using DrhLib.Rles;
+using DrhtfLib.Utility;
 
 namespace DrhLib.Compress
 {

@@ -1,4 +1,4 @@
-﻿using DdhtfLib.Utility;
+﻿using DrhtfLib.Utility;
 using DrhLib.Compress;
 using DrhLib.Rles;
 using DrhLib.Statistics;

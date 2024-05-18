@@ -1,4 +1,4 @@
-﻿namespace DdhtfLib.Utility
+﻿namespace DrhtfLib.Utility
 {
 	public enum DeltaKind
 	{
