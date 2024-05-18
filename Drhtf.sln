@@ -3,9 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34316.72
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Drhtf", "Drhtf\Drhtf.csproj", "{D5568EE2-F1FF-4B4B-92D1-551714D6AF3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Drhtf", "Drhtf\Drhtf.csproj", "{D5568EE2-F1FF-4B4B-92D1-551714D6AF3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrhtfLib", "DrhtfLib\DrhtfLib.csproj", "{10180F5E-1864-48FA-AD84-842CE40C4392}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DrhtfLib", "DrhtfLib\DrhtfLib.csproj", "{10180F5E-1864-48FA-AD84-842CE40C4392}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F87AD6F6-7A15-4414-AE9A-14D15B502C33}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

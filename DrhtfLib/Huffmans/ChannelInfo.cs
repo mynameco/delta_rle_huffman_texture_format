@@ -5,7 +5,6 @@
 		public List<CodeEntry> Codes = new List<CodeEntry>(258);
 		public List<CodeEntry> TmpCodes = new List<CodeEntry>(258);
 		public CodeEntry RleCode = new CodeEntry() { Index = 1001 };
-		public CodeEntry SignCode = new CodeEntry() { Index = 1002 };
 
 		public CodeEntryPool Pool = new CodeEntryPool();
 
@@ -52,7 +51,6 @@
 			}
 
 			RleCode.Cleanup();
-			SignCode.Cleanup();
 		}
 
 		public void CleanupWithoutCount()
@@ -64,7 +62,6 @@
 			}
 
 			RleCode.CleanupWithoutCount();
-			SignCode.Cleanup();
 		}
 	}
 }

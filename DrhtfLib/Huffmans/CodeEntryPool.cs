@@ -3,20 +3,20 @@
 	public class CodeEntryPool
 	{
 		private List<CodeEntry> entries = new List<CodeEntry>(258);
-		private List<CodeEntry> usedEntries = new List<CodeEntry>(258);
+		private int freeIndex = 0;
 
 		public CodeEntry Get()
 		{
-			if (entries.Count == 0)
+			if (freeIndex >= entries.Count)
 			{
 				var result = new CodeEntry();
-				usedEntries.Add(result);
+				entries.Add(result);
+				freeIndex++;
 				return result;
 			}
 
-			var result2 = entries[entries.Count - 1];
-			entries.RemoveAt(entries.Count - 1);
-			usedEntries.Add(result2);
+			var result2 = entries[freeIndex];
+			freeIndex++;
 
 			result2.Reset();
 			return result2;
@@ -24,8 +24,7 @@
 
 		public void Reset()
 		{
-			entries.AddRange(usedEntries);
-			usedEntries.Clear();
+			freeIndex = 0;
 		}
 	}
 }
