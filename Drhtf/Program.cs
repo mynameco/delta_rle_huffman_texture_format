@@ -40,9 +40,6 @@ namespace Drh
 					Console.WriteLine("[Error] File not found : " + fileName);
 					return;
 				}
-
-				var fi = new FileInfo(fileName);
-				Directory.SetCurrentDirectory(fi.DirectoryName);
 			}
 
 			Compress(fileName);
