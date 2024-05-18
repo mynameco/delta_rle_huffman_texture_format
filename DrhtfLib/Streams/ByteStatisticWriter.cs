@@ -44,8 +44,7 @@ namespace DrhLib.Streams
 				Number7Utility.Write(this, bitLength);
 
 				var part = bitLength & 0b_111;
-				bitLength >>= 3; // TODO xor
-				bitLength <<= 3;
+				bitLength &= ~0b_111;
 				if (part != 0)
 					bitLength += 8;
 			}
