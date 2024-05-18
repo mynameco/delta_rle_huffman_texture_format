@@ -1,0 +1,12 @@
+----------------------------------------------------------
+Decompress
+../../../../Data/Lenna.png
+Version : 1 , Width : 1084 , Height : 576 , Has alpha : False
+----------------------------------------------------------
+Real bit length : 6 077 797 , length : 759 724 , part : 5
+Bit length : 6 077 797 , length : 759 724 , part : 5
+Test png file :
+Length : 1 477 617 ( 78 % )
+
+Time seconds : 0
+

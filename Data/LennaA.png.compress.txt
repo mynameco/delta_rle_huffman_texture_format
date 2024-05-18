@@ -1,0 +1,24 @@
+----------------------------------------------------------
+Compress
+../../../../Data/LennaA.png
+Pixel format : Format32bppArgb
+Width : 1084 , Height : 576 , Has alpha : True
+In memory : 2 497 536
+Original png file length :
+Length : 402 974 ( 16 % )
+
+----------------------------------------------------------
+Bit length : 2 460 055 , length : 307 506 , part : 7
+Byte total
+Length : 307 511 ( 12 % )
+Delta H count : 156
+Delta V count : 293
+Delta HV count : 127
+Rle count : 42149
+HA : 472
+SHA : 1 495
+H : 164
+SH : 173
+
+Time seconds : 0
+
