@@ -4,6 +4,8 @@
 	{
 		H,
 		V,
-		HV
+		HV,
+
+		Count
 	}
 }
