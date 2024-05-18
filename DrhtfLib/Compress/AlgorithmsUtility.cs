@@ -1,8 +1,6 @@
-﻿using DrhtfLib.Utility;
-using DrhLib.Streams;
+﻿using DrhLib.Streams;
 using DrhLib.Utility;
-using System;
-using System.Threading.Tasks;
+using DrhtfLib.Utility;
 
 namespace DrhLib.Compress
 {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-
-namespace DrhLib.Streams
+﻿namespace DrhLib.Streams
 {
 	public class MemoryStreamPool :
 		IDisposable

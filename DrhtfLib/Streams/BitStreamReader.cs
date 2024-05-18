@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DrhLib.Streams
+﻿namespace DrhLib.Streams
 {
 	public class BitStreamReader :
 		IBitStreamReader

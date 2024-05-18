@@ -1,5 +1,4 @@
 ﻿using DrhLib.Streams;
-using System;
 
 namespace DrhLib.Utility
 {

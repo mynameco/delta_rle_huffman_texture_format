@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-
-namespace DrhLib.Streams
+﻿namespace DrhLib.Streams
 {
 	public class BitStreamWriter :
 		IBitStreamWriter

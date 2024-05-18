@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace DrhLib.Huffmans
+﻿namespace DrhLib.Huffmans
 {
 	public class CodeEntryPool
 	{

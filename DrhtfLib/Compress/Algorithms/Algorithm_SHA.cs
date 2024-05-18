@@ -2,7 +2,6 @@
 using DrhLib.Rles;
 using DrhLib.Streams;
 using DrhLib.Utility;
-using System;
 
 namespace DrhLib.Compress.Algorithms
 {

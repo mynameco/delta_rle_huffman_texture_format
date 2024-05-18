@@ -1,7 +1,6 @@
 ﻿using DrhLib.Rles;
 using DrhLib.Statistics;
 using DrhLib.Streams;
-using System;
 
 namespace DrhLib.Utility
 {

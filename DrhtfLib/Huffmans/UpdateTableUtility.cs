@@ -1,7 +1,6 @@
 ﻿using DrhLib.Compress;
 using DrhLib.Rles;
 using DrhLib.Utility;
-using System;
 
 namespace DrhLib.Huffmans
 {
