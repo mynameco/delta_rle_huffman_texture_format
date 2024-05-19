@@ -6,7 +6,7 @@ namespace DrhLib.Huffmans
 {
 	public static class UpdateTableUtility
 	{
-		public static void PrepareTable(ChannelInfo info)
+		public static void PrepareTable(ChannelInfo info, IComputeRle rle)
 		{
 			info.Pool.Reset();
 
@@ -19,7 +19,8 @@ namespace DrhLib.Huffmans
 				tmpCodes.Add(entry);
 			}
 
-			tmpCodes.Add(info.RleCode);
+			if (!rle.IsStub)
+				tmpCodes.Add(info.RleCode);
 		}
 
 		public static void ComputeTable(ChannelInfo info)
@@ -78,7 +79,7 @@ namespace DrhLib.Huffmans
 			else
 				info.CleanupWithoutCount();
 
-			PrepareTable(info);
+			PrepareTable(info, rle);
 
 			var tmpCodes = info.TmpCodes;
 
@@ -88,12 +89,15 @@ namespace DrhLib.Huffmans
 
 				if (value == 0)
 				{
-					var count = rle.GetCount(values, channel, index);
-					if (count >= minZeroCount)
+					if (!rle.IsStub)
 					{
-						info.RleCode.Count++;
-						index += count - 1;
-						continue;
+						var count = rle.GetCount(values, channel, index);
+						if (count >= minZeroCount)
+						{
+							info.RleCode.Count++;
+							index += count - 1;
+							continue;
+						}
 					}
 				}
 
@@ -117,7 +121,7 @@ namespace DrhLib.Huffmans
 			else
 				info.CleanupWithoutCount();
 
-			PrepareTable(info);
+			PrepareTable(info, rle);
 
 			var prevSign = false;
 
@@ -129,12 +133,15 @@ namespace DrhLib.Huffmans
 
 				if (value == 0)
 				{
-					var count = rle.GetCount(values, channel, index);
-					if (count >= minZeroCount)
+					if (!rle.IsStub)
 					{
-						info.RleCode.Count++;
-						index += count - 1;
-						continue;
+						var count = rle.GetCount(values, channel, index);
+						if (count >= minZeroCount)
+						{
+							info.RleCode.Count++;
+							index += count - 1;
+							continue;
+						}
 					}
 				}
 

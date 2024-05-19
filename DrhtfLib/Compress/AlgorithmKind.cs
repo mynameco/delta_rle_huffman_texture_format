@@ -7,6 +7,11 @@
 		H,
 		SH,
 
+		RHA,
+		RSHA,
+		RH,
+		RSH,
+
 		Count
 	}
 }

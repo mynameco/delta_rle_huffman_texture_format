@@ -20,7 +20,7 @@ namespace DrhLib.Compress.Algorithms
 			for (int index = 0; index < infos.Length; index++)
 			{
 				infos[index] = new ChannelInfo();
-				infos[index].LoadFirstTable();
+				infos[index].LoadFirstTable(rle);
 			}
 		}
 

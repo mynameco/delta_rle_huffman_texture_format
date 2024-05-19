@@ -1,4 +1,6 @@
-﻿namespace DrhLib.Huffmans
+﻿using DrhLib.Rles;
+
+namespace DrhLib.Huffmans
 {
 	public class ChannelInfo
 	{
@@ -10,7 +12,7 @@
 
 		public int MinZeroCount = 3;
 
-		public void LoadFirstTable()
+		public void LoadFirstTable(IComputeRle rle)
 		{
 			for (int index = 0; index < 256; index++)
 			{
@@ -19,7 +21,7 @@
 				Codes.Add(code);
 			}
 
-			UpdateTableUtility.PrepareTable(this);
+			UpdateTableUtility.PrepareTable(this, rle);
 
 			var max = 16;
 			var count = 1;

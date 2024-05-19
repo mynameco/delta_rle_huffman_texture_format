@@ -7,6 +7,7 @@ namespace DrhLib.Rles
 	public class ComputeRle :
 		IComputeRle
 	{
+		public bool IsStub => false;
 		public int MinSize => Number4Utility.MinSize;
 
 		public int GetCount(Span<Color32> values, int channel, int startIndex)

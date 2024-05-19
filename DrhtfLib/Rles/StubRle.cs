@@ -7,6 +7,7 @@ namespace DrhLib.Rles
 	public class StubRle :
 		IComputeRle
 	{
+		public bool IsStub => true;
 		public int MinSize => 0;
 
 		public int GetCount(Span<Color32> values, int channel, int startIndex)

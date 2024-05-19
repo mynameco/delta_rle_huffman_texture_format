@@ -18,8 +18,11 @@ namespace DrhLib.Huffmans
 
 				if (value == 0)
 				{
-					if (rle.Compute(writer, values, channel, ref index, rleEntry, zeroEntry, ref rleCount))
-						continue;
+					if (!rle.IsStub)
+					{
+						if (rle.Compute(writer, values, channel, ref index, rleEntry, zeroEntry, ref rleCount))
+							continue;
+					}
 				}
 
 				var entry = info.Codes[value];
@@ -41,8 +44,11 @@ namespace DrhLib.Huffmans
 
 				if (value == 0)
 				{
-					if (rle.Compute(writer, values, channel, ref index, rleEntry, zeroEntry, ref rleCount))
-						continue;
+					if (!rle.IsStub)
+					{
+						if (rle.Compute(writer, values, channel, ref index, rleEntry, zeroEntry, ref rleCount))
+							continue;
+					}
 				}
 				else if (value != -128)
 				{

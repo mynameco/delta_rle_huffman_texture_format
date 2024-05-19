@@ -6,7 +6,7 @@ namespace DrhLib.Compress
 {
 	public static class AlgorithmsUtility
 	{
-		public const int KindSize = 2;
+		public const int KindSize = 3;
 
 		public static IBitStreamWriter WriteLineAsync(
 			IByteStreamWriter writer,
