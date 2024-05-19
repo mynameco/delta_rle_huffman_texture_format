@@ -9,11 +9,13 @@ namespace DrhLib.Compress.Algorithms
 		ICompressAlgorithm
 	{
 		private IComputeRle rle;
+		private bool resetAll;
 		private ChannelInfo[] infos;
 
-		public Algorithm_SH(IComputeRle rle, int channelCount)
+		public Algorithm_SH(IComputeRle rle, int channelCount, bool resetAll)
 		{
 			this.rle = rle;
+			this.resetAll = resetAll;
 
 			infos = new ChannelInfo[channelCount];
 
@@ -42,7 +44,7 @@ namespace DrhLib.Compress.Algorithms
 		{
 			var info = infos[channel];
 
-			UpdateTableUtility.UpdateTableSH(values, channel, lineIndex, kind, info, true, ref info.MinZeroCount, rle);
+			UpdateTableUtility.UpdateTableSH(values, channel, lineIndex, kind, info, resetAll, ref info.MinZeroCount, rle);
 		}
 	}
 }

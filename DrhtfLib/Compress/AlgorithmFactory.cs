@@ -11,32 +11,17 @@ namespace DrhLib.Compress
 
 		public AlgorithmFactory(IComputeRle rle, int channelCount)
 		{
-			algorithms[(int)AlgorithmKind.HA, (int)DeltaKind.H] = new Algorithm_HA(stubRle, channelCount);
-			algorithms[(int)AlgorithmKind.SHA, (int)DeltaKind.H] = new Algorithm_SHA(stubRle, channelCount);
-			algorithms[(int)AlgorithmKind.H, (int)DeltaKind.H] = new Algorithm_H(stubRle, channelCount);
-			algorithms[(int)AlgorithmKind.SH, (int)DeltaKind.H] = new Algorithm_SH(stubRle, channelCount);
-			algorithms[(int)AlgorithmKind.RHA, (int)DeltaKind.H] = new Algorithm_HA(rle, channelCount);
-			algorithms[(int)AlgorithmKind.RSHA, (int)DeltaKind.H] = new Algorithm_SHA(rle, channelCount);
-			algorithms[(int)AlgorithmKind.RH, (int)DeltaKind.H] = new Algorithm_H(rle, channelCount);
-			algorithms[(int)AlgorithmKind.RSH, (int)DeltaKind.H] = new Algorithm_SH(rle, channelCount);
-
-			algorithms[(int)AlgorithmKind.HA, (int)DeltaKind.V] = new Algorithm_HA(stubRle, channelCount);
-			algorithms[(int)AlgorithmKind.SHA, (int)DeltaKind.V] = new Algorithm_SHA(stubRle, channelCount);
-			algorithms[(int)AlgorithmKind.H, (int)DeltaKind.V] = new Algorithm_H(stubRle, channelCount);
-			algorithms[(int)AlgorithmKind.SH, (int)DeltaKind.V] = new Algorithm_SH(stubRle, channelCount);
-			algorithms[(int)AlgorithmKind.RHA, (int)DeltaKind.V] = new Algorithm_HA(rle, channelCount);
-			algorithms[(int)AlgorithmKind.RSHA, (int)DeltaKind.V] = new Algorithm_SHA(rle, channelCount);
-			algorithms[(int)AlgorithmKind.RH, (int)DeltaKind.V] = new Algorithm_H(rle, channelCount);
-			algorithms[(int)AlgorithmKind.RSH, (int)DeltaKind.V] = new Algorithm_SH(rle, channelCount);
-
-			algorithms[(int)AlgorithmKind.HA, (int)DeltaKind.HV] = new Algorithm_HA(stubRle, channelCount);
-			algorithms[(int)AlgorithmKind.SHA, (int)DeltaKind.HV] = new Algorithm_SHA(stubRle, channelCount);
-			algorithms[(int)AlgorithmKind.H, (int)DeltaKind.HV] = new Algorithm_H(stubRle, channelCount);
-			algorithms[(int)AlgorithmKind.SH, (int)DeltaKind.HV] = new Algorithm_SH(stubRle, channelCount);
-			algorithms[(int)AlgorithmKind.RHA, (int)DeltaKind.HV] = new Algorithm_HA(rle, channelCount);
-			algorithms[(int)AlgorithmKind.RSHA, (int)DeltaKind.HV] = new Algorithm_SHA(rle, channelCount);
-			algorithms[(int)AlgorithmKind.RH, (int)DeltaKind.HV] = new Algorithm_H(rle, channelCount);
-			algorithms[(int)AlgorithmKind.RSH, (int)DeltaKind.HV] = new Algorithm_SH(rle, channelCount);
+			for (int deltaKind = 0; deltaKind < (int)DeltaKind.Count; deltaKind++)
+			{
+				algorithms[(int)AlgorithmKind.HA, deltaKind] = new Algorithm_H(stubRle, channelCount, false);
+				algorithms[(int)AlgorithmKind.SHA, deltaKind] = new Algorithm_SH(stubRle, channelCount, false);
+				algorithms[(int)AlgorithmKind.H, deltaKind] = new Algorithm_H(stubRle, channelCount, true);
+				algorithms[(int)AlgorithmKind.SH, deltaKind] = new Algorithm_SH(stubRle, channelCount, true);
+				algorithms[(int)AlgorithmKind.RHA, deltaKind] = new Algorithm_H(rle, channelCount, false);
+				algorithms[(int)AlgorithmKind.RSHA, deltaKind] = new Algorithm_SH(rle, channelCount, false);
+				algorithms[(int)AlgorithmKind.RH, deltaKind] = new Algorithm_H(rle, channelCount, true);
+				algorithms[(int)AlgorithmKind.RSH, deltaKind] = new Algorithm_SH(rle, channelCount, true);
+			}
 		}
 
 		public ICompressAlgorithm Get(AlgorithmKind kind, DeltaKind deltaKind)
