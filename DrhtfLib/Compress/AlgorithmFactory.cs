@@ -15,10 +15,11 @@ namespace DrhLib.Compress
 			{
 				algorithms[(int)AlgorithmKind.HA, deltaKind] = new Algorithm_H(stubRle, channelCount, false);
 				algorithms[(int)AlgorithmKind.SHA, deltaKind] = new Algorithm_SH(stubRle, channelCount, false);
-				algorithms[(int)AlgorithmKind.H, deltaKind] = new Algorithm_H(stubRle, channelCount, true);
-				algorithms[(int)AlgorithmKind.SH, deltaKind] = new Algorithm_SH(stubRle, channelCount, true);
 				algorithms[(int)AlgorithmKind.RHA, deltaKind] = new Algorithm_H(rle, channelCount, false);
 				algorithms[(int)AlgorithmKind.RSHA, deltaKind] = new Algorithm_SH(rle, channelCount, false);
+
+				algorithms[(int)AlgorithmKind.H, deltaKind] = new Algorithm_H(stubRle, channelCount, true);
+				algorithms[(int)AlgorithmKind.SH, deltaKind] = new Algorithm_SH(stubRle, channelCount, true);
 				algorithms[(int)AlgorithmKind.RH, deltaKind] = new Algorithm_H(rle, channelCount, true);
 				algorithms[(int)AlgorithmKind.RSH, deltaKind] = new Algorithm_SH(rle, channelCount, true);
 			}

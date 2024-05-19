@@ -14,13 +14,13 @@ Length : 757 530 ( 40 % )
 Delta H count : 71
 Delta V count : 120
 Delta HV count : 385
-Rle count : 54199
+Rle count : 54251
 HA : 82
 SHA : 369
-H : 3
-SH : 12
 RHA : 111
-RSHA : 1 110
+RSHA : 1 111
+H : 3
+SH : 11
 RH : 0
 RSH : 41
 

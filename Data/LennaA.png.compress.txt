@@ -17,10 +17,10 @@ Delta HV count : 127
 Rle count : 42149
 HA : 0
 SHA : 0
-H : 0
-SH : 0
 RHA : 472
 RSHA : 1 495
+H : 0
+SH : 0
 RH : 164
 RSH : 173
 

@@ -4,11 +4,11 @@
 	{
 		HA,
 		SHA,
-		H,
-		SH,
-
 		RHA,
 		RSHA,
+
+		H,
+		SH,
 		RH,
 		RSH,
 
