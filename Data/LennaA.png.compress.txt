@@ -8,17 +8,21 @@ Original png file length :
 Length : 402 974 ( 16 % )
 
 ----------------------------------------------------------
-Bit length : 2 460 055 , length : 307 506 , part : 7
+Bit length : 2 462 359 , length : 307 794 , part : 7
 Byte total
-Length : 307 511 ( 12 % )
+Length : 307 799 ( 12 % )
 Delta H count : 156
 Delta V count : 293
 Delta HV count : 127
 Rle count : 42149
-HA : 472
-SHA : 1 495
-H : 164
-SH : 173
+HA : 0
+SHA : 0
+H : 0
+SH : 0
+RHA : 472
+RSHA : 1 495
+RH : 164
+RSH : 173
 
-Time seconds : 0
+Time seconds : 1
 
