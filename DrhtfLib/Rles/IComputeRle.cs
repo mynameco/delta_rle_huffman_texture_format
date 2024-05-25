@@ -1,10 +1,10 @@
 ﻿using DrhLib.Huffmans;
 using DrhLib.Streams;
-using DrhLib.Utility;
+using DrhtfLib.Commons;
 
 namespace DrhLib.Rles
 {
-	public interface IComputeRle
+    public interface IComputeRle
 	{
 		bool IsStub { get; }
 		int MinSize { get; }

@@ -1,4 +1,6 @@
-﻿namespace DrhLib.Utility
+﻿using DrhtfLib.Commons;
+
+namespace DrhtfLib.Encoders
 {
 	public static class DeltaLineUtility
 	{

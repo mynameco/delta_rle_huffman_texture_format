@@ -1,9 +1,11 @@
 ﻿using DrhLib.Compress;
 using DrhLib.Rles;
 using DrhLib.Streams;
+using DrhLib.Utility;
+using DrhtfLib.Commons;
 using DrhtfLib.Utility;
 
-namespace DrhLib.Utility
+namespace DrhtfLib.Encoders
 {
 	public class DecodeLineState
 	{
@@ -130,7 +132,7 @@ namespace DrhLib.Utility
 							});
 
 					task.Start();
-					tasks[((int)AlgorithmKind.Count * tmpChannel) + tmpKind] = task;
+					tasks[(int)AlgorithmKind.Count * tmpChannel + tmpKind] = task;
 				}
 			}
 

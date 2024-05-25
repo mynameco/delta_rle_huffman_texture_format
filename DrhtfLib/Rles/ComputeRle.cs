@@ -1,10 +1,11 @@
 ﻿using DrhLib.Huffmans;
 using DrhLib.Streams;
 using DrhLib.Utility;
+using DrhtfLib.Commons;
 
 namespace DrhLib.Rles
 {
-	public class ComputeRle :
+    public class ComputeRle :
 		IComputeRle
 	{
 		public bool IsStub => false;

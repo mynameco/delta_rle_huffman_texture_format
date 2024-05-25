@@ -1,7 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace DrhLib.Utility
+namespace DrhtfLib.Commons
 {
 	[StructLayout(LayoutKind.Explicit)]
 	public unsafe struct Color32

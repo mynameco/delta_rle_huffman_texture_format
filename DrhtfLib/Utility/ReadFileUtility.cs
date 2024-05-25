@@ -1,5 +1,7 @@
 ﻿using DrhLib.Rles;
 using DrhLib.Streams;
+using DrhtfLib.Commons;
+using DrhtfLib.Encoders;
 
 namespace DrhLib.Utility
 {

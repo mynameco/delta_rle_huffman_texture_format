@@ -1,11 +1,11 @@
 ﻿using DrhLib.Huffmans;
 using DrhLib.Rles;
 using DrhLib.Streams;
-using DrhLib.Utility;
+using DrhtfLib.Commons;
 
 namespace DrhLib.Compress.Algorithms
 {
-	public class Algorithm_H :
+    public class Algorithm_H :
 		ICompressAlgorithm
 	{
 		private IComputeRle rle;

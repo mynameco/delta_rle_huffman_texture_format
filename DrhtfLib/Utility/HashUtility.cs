@@ -1,6 +1,8 @@
-﻿namespace DrhLib.Utility
+﻿using DrhtfLib.Commons;
+
+namespace DrhLib.Utility
 {
-	public static class HashUtility
+    public static class HashUtility
 	{
 		public const ulong StartHash = 5381;
 

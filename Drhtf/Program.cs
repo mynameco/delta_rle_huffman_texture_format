@@ -3,6 +3,7 @@ using DrhLib.Rles;
 using DrhLib.Statistics;
 using DrhLib.Streams;
 using DrhLib.Utility;
+using DrhtfLib.Commons;
 
 namespace Drh
 {

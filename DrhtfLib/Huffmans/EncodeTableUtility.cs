@@ -1,11 +1,11 @@
 ﻿using DrhLib.Compress;
 using DrhLib.Rles;
 using DrhLib.Streams;
-using DrhLib.Utility;
+using DrhtfLib.Commons;
 
 namespace DrhLib.Huffmans
 {
-	public static class EncodeTableUtility
+    public static class EncodeTableUtility
 	{
 		public static void EncodeH(IBitStreamWriter writer, Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, ChannelInfo info, IComputeRle rle, ref int rleCount)
 		{

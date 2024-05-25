@@ -1,10 +1,11 @@
 ﻿using DrhLib.Utility;
+using DrhtfLib.Commons;
 using System.Drawing;
 using System.Drawing.Imaging;
 
 namespace Drh.Utility
 {
-	public static class TextureUtility
+    public static class TextureUtility
 	{
 		public unsafe static bool LoadTexture(string fileName, out int width, out int height, out Color32[] pixels, out bool hasAlpha)
 		{

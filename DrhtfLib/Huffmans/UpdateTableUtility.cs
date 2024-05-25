@@ -1,6 +1,6 @@
 ﻿using DrhLib.Compress;
 using DrhLib.Rles;
-using DrhLib.Utility;
+using DrhtfLib.Commons;
 
 namespace DrhLib.Huffmans
 {

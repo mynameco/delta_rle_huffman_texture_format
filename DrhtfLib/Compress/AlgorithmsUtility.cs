@@ -1,10 +1,11 @@
 ﻿using DrhLib.Streams;
 using DrhLib.Utility;
+using DrhtfLib.Commons;
 using DrhtfLib.Utility;
 
 namespace DrhLib.Compress
 {
-	public static class AlgorithmsUtility
+    public static class AlgorithmsUtility
 	{
 		public const int KindSize = 3;
 
