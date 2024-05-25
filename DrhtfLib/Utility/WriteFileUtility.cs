@@ -42,30 +42,8 @@ namespace DrhLib.Utility
 			bool checkAlgorithms,
 			AlgorithmStatistics byteStatistics)
 		{
-			var lineState = new EncodeLineState(rle, width, channelCount);
-
-			var pixelsSize = pixels.Length;
-
-			var startTime = DateTime.UtcNow;
-			var needNewLine = false;
-
-			var lineIndex = 0;
-			for (int offset = 0; offset < pixelsSize; offset += width, lineIndex++)
-			{
-				lineState.EncodeLine(writer, pixels, offset, lineIndex, useAsync, checkAlgorithms, byteStatistics);
-
-				var endTime = DateTime.UtcNow;
-				var deltaTime = endTime - startTime;
-				if (deltaTime.TotalSeconds > 2)
-				{
-					startTime = endTime;
-					needNewLine = true;
-					Console.Write(((long)offset * 100 / pixelsSize) + " % , ");
-				}
-			}
-
-			if (needNewLine)
-				Console.WriteLine();
+			var encoder = new Encoder(rle, width, height, channelCount);
+			encoder.EncodeLines(writer, pixels, useAsync, checkAlgorithms, byteStatistics);
 		}
 	}
 }

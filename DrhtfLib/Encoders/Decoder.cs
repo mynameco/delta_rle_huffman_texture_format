@@ -7,9 +7,10 @@ using DrhtfLib.Utility;
 
 namespace DrhtfLib.Encoders
 {
-	public class DecodeLineState
+	public class Decoder
 	{
 		private int width;
+		private int height;
 		private int channelCount;
 
 		private AlgorithmFactory factory;
@@ -24,9 +25,10 @@ namespace DrhtfLib.Encoders
 
 		private Task[] tasks;
 
-		public DecodeLineState(IComputeRle rle, int width, int channelCount)
+		public Decoder(IComputeRle rle, int width, int height, int channelCount)
 		{
 			this.width = width;
+			this.height = height;
 			this.channelCount = channelCount;
 
 			factory = new AlgorithmFactory(rle, channelCount);
@@ -62,7 +64,7 @@ namespace DrhtfLib.Encoders
 			DeltaDecodeChannels(pixels, deltaKind, offset);
 
 			// А потом снова кодируем для статистики
-			DeltaLineUtility.DeltaEncodeChannels(pixels, offset, width, prevLine, channelCount, lineH, lineV, lineHV);
+			EncoderUtility.DeltaEncodeChannels(pixels, offset, width, prevLine, lineH, lineV, lineHV);
 
 			if (useAsync)
 			{
@@ -197,6 +199,35 @@ namespace DrhtfLib.Encoders
 
 				pixels[indexX] = currentPixel;
 			}
+		}
+
+		public bool DecodeLines(IBitStreamReader reader, Color32[] pixels, bool useAsync)
+		{
+			var pixelsSize = pixels.Length;
+
+			var startTime = DateTime.UtcNow;
+			var needNewLine = false;
+
+			var lineIndex = 0;
+			for (int offset = 0; offset < pixelsSize; offset += width, lineIndex++)
+			{
+				if (!DecodeLine(reader, pixels, offset, lineIndex, useAsync))
+					return false;
+
+				var endTime = DateTime.UtcNow;
+				var deltaTime = endTime - startTime;
+				if (deltaTime.TotalSeconds > 2)
+				{
+					startTime = endTime;
+					needNewLine = true;
+					Console.Write(((long)offset * 100 / pixelsSize) + " % , ");
+				}
+			}
+
+			if (needNewLine)
+				Console.WriteLine();
+
+			return true;
 		}
 	}
 }

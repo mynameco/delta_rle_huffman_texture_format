@@ -2,9 +2,9 @@
 
 namespace DrhtfLib.Encoders
 {
-	public static class DeltaLineUtility
+	public static class EncoderUtility
 	{
-		public static void DeltaEncodeChannels(Color32[] pixels, int offset, int width, Color32[] prevLine, int channelCount, Color32[] lineH, Color32[] lineV, Color32[] lineHV)
+		public static void DeltaEncodeChannels(Color32[] pixels, int offset, int width, Color32[] prevLine, Color32[] lineH, Color32[] lineV, Color32[] lineHV)
 		{
 			var indexX = offset;
 

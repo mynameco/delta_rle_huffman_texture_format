@@ -48,33 +48,8 @@ namespace DrhLib.Utility
 			int channelCount,
 			bool useAsync)
 		{
-			var lineState = new DecodeLineState(rle, width, channelCount);
-
-			var pixelsSize = pixels.Length;
-
-			var startTime = DateTime.UtcNow;
-			var needNewLine = false;
-
-			var lineIndex = 0;
-			for (int offset = 0; offset < pixelsSize; offset += width, lineIndex++)
-			{
-				if (!lineState.DecodeLine(reader, pixels, offset, lineIndex, useAsync))
-					return false;
-
-				var endTime = DateTime.UtcNow;
-				var deltaTime = endTime - startTime;
-				if (deltaTime.TotalSeconds > 2)
-				{
-					startTime = endTime;
-					needNewLine = true;
-					Console.Write(((long)offset * 100 / pixelsSize) + " % , ");
-				}
-			}
-
-			if (needNewLine)
-				Console.WriteLine();
-
-			return true;
+			var decoder = new Decoder(rle, width, height, channelCount);
+			return decoder.DecodeLines(reader, pixels, useAsync);
 		}
 	}
 }
