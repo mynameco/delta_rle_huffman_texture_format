@@ -63,7 +63,7 @@ namespace DrhtfLib.Encoders
 			// Декодируем, 
 			DeltaDecodeChannels(pixels, deltaKind, offset);
 
-			// А потом снова кодируем для статистики
+			// TODO А потом снова кодируем для статистики (можно это в декодере сделать)
 			EncoderUtility.DeltaEncodeChannels(pixels, offset, width, prevLine, lineH, lineV, lineHV);
 
 			if (useAsync)
@@ -177,6 +177,7 @@ namespace DrhtfLib.Encoders
 					currentPrevLinePixel = pixels[indexPrevLineX];
 
 				var currentPixel = pixels[indexX];
+
 				currentPixel[Color32.Red] += currentPixel[Color32.Green];
 				currentPixel[Color32.Blue] += currentPixel[Color32.Green];
 

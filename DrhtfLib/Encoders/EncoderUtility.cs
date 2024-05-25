@@ -15,36 +15,12 @@ namespace DrhtfLib.Encoders
 				var currentPixel = pixels[indexX];
 				var currentPrevLinePixel = prevLine[index];
 
-				{
-					var pixelH = currentPixel;
-					pixelH -= prevPixel;
+				currentPixel[Color32.Red] -= currentPixel[Color32.Green];
+				currentPixel[Color32.Blue] -= currentPixel[Color32.Green];
 
-					pixelH[Color32.Red] -= pixelH[Color32.Green];
-					pixelH[Color32.Blue] -= pixelH[Color32.Green];
-
-					lineH[index] = pixelH;
-				}
-
-				{
-					var pixelV = currentPixel;
-					pixelV -= currentPrevLinePixel;
-
-					pixelV[Color32.Red] -= pixelV[Color32.Green];
-					pixelV[Color32.Blue] -= pixelV[Color32.Green];
-
-					lineV[index] = pixelV;
-				}
-
-				{
-					var pixelHV = currentPixel;
-					pixelHV -= prevPixel;
-					pixelHV -= currentPrevLinePixel - prevLinePixel;
-
-					pixelHV[Color32.Red] -= pixelHV[Color32.Green];
-					pixelHV[Color32.Blue] -= pixelHV[Color32.Green];
-
-					lineHV[index] = pixelHV;
-				}
+				lineH[index] = currentPixel - prevPixel;
+				lineV[index] = currentPixel - currentPrevLinePixel;
+				lineHV[index] = currentPixel - prevPixel - (currentPrevLinePixel - prevLinePixel);
 
 				prevPixel = currentPixel;
 				prevLinePixel = currentPrevLinePixel;
