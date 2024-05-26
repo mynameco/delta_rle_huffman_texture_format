@@ -217,6 +217,10 @@ namespace DrhtfLib.Encoders
 
 		private void ComputeResults(IByteStreamWriter writer, AlgorithmStatistics byteStatistics, long lengthH, long lengthV, long lengthHV)
 		{
+			lengthH += 2;
+			lengthV += 2;
+			lengthHV += 1;
+
 			var deltaKind = DeltaKind.HV;
 			if (lengthH < lengthV &&
 				lengthH < lengthHV)
