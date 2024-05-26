@@ -251,7 +251,7 @@ namespace DrhtfLib.Encoders
 
 					lock (byteStatistics)
 					{
-						byteStatistics.Tables[resultKindsH[channel]]++;
+						byteStatistics.Algorithms[channel, resultKindsH[channel]]++;
 						byteStatistics.Rle[channel] += resultRlesH[channel];
 						byteStatistics.Length[channel] += length;
 					}
@@ -278,7 +278,7 @@ namespace DrhtfLib.Encoders
 
 					lock (byteStatistics)
 					{
-						byteStatistics.Tables[resultKindsV[channel]]++;
+						byteStatistics.Algorithms[channel, resultKindsV[channel]]++;
 						byteStatistics.Rle[channel] += resultRlesV[channel];
 						byteStatistics.Length[channel] += length;
 					}
@@ -305,7 +305,7 @@ namespace DrhtfLib.Encoders
 
 					lock (byteStatistics)
 					{
-						byteStatistics.Tables[resultKindsHV[channel]]++;
+						byteStatistics.Algorithms[channel, resultKindsHV[channel]]++;
 						byteStatistics.Rle[channel] += resultRlesHV[channel];
 						byteStatistics.Length[channel] += length;
 					}

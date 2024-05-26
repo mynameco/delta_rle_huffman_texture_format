@@ -39,6 +39,7 @@ namespace DrhLib.Statistics
 			builder.Append(" % )");
 			builder.AppendLine();
 
+			builder.AppendLine();
 			for (int index = 0; index < (int)DeltaKind.Count; index++)
 			{
 				builder.Append("Delta count [");
@@ -48,31 +49,39 @@ namespace DrhLib.Statistics
 				builder.AppendLine();
 			}
 
-			for (int index = 0; index < channelCount; index++)
+			builder.AppendLine();
+			for (int channel = 0; channel < channelCount; channel++)
 			{
 				builder.Append("Channel rle count [");
-				builder.Append(index);
+				builder.Append(channel);
 				builder.Append("] : ");
-				builder.Append(TextConvertUtility.ToByteString(statistics.Rle[index]));
+				builder.Append(TextConvertUtility.ToByteString(statistics.Rle[channel]));
 				builder.AppendLine();
 			}
 
-			for (int index = 0; index < channelCount; index++)
+			builder.AppendLine();
+			for (int channel = 0; channel < channelCount; channel++)
 			{
 				builder.Append("Channel length [");
-				builder.Append(index);
+				builder.Append(channel);
 				builder.Append("] : ");
-				builder.Append(TextConvertUtility.ToByteString(statistics.Length[index]));
+				builder.Append(TextConvertUtility.ToByteString(statistics.Length[channel]));
 				builder.AppendLine();
 			}
 
-			for (var index = 0; index < statistics.Tables.Length; index++)
+			for (int channel = 0; channel < channelCount; channel++)
 			{
-				var value = statistics.Tables[index];
-				builder.Append((AlgorithmKind)index);
-				builder.Append(" : ");
-				builder.Append(TextConvertUtility.ToByteString(value));
 				builder.AppendLine();
+				for (var index = 0; index < (int)AlgorithmKind.Count; index++)
+				{
+					var value = statistics.Algorithms[channel, index];
+					builder.Append((AlgorithmKind)index);
+					builder.Append(" [");
+					builder.Append(channel);
+					builder.Append("] : ");
+					builder.Append(TextConvertUtility.ToByteString(value));
+					builder.AppendLine();
+				}
 			}
 
 			Logger.WriteLine(builder.ToString());
