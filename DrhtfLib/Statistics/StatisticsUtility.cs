@@ -1,5 +1,6 @@
 ﻿using DrhLib.Compress;
 using DrhLib.Utility;
+using DrhtfLib.Utility;
 using System.Text;
 
 namespace DrhLib.Statistics
@@ -26,7 +27,7 @@ namespace DrhLib.Statistics
 			Logger.WriteLine(header + " : " + TextConvertUtility.ToByteString(bitLength) + " , length : " + TextConvertUtility.ToByteString(bitLength >> 3) + " , part : " + TextConvertUtility.ToByteString(bitLength & 0b_111));
 		}
 
-		public static void WriteByteStatistics(string header, AlgorithmStatistics statistics, long length, long byteLength)
+		public static void WriteByteStatistics(string header, AlgorithmStatistics statistics, long length, long byteLength, int channelCount)
 		{
 			var builder = new StringBuilder();
 			builder.AppendLine(header);
@@ -38,21 +39,32 @@ namespace DrhLib.Statistics
 			builder.Append(" % )");
 			builder.AppendLine();
 
-			builder.Append("Delta H count : ");
-			builder.Append(statistics.DeltaH);
-			builder.AppendLine();
+			for (int index = 0; index < (int)DeltaKind.Count; index++)
+			{
+				builder.Append("Delta count [");
+				builder.Append((DeltaKind)index);
+				builder.Append("] : ");
+				builder.Append(statistics.Delta[index]);
+				builder.AppendLine();
+			}
 
-			builder.Append("Delta V count : ");
-			builder.Append(statistics.DeltaV);
-			builder.AppendLine();
+			for (int index = 0; index < channelCount; index++)
+			{
+				builder.Append("Channel rle count [");
+				builder.Append(index);
+				builder.Append("] : ");
+				builder.Append(TextConvertUtility.ToByteString(statistics.Rle[index]));
+				builder.AppendLine();
+			}
 
-			builder.Append("Delta HV count : ");
-			builder.Append(statistics.DeltaHV);
-			builder.AppendLine();
-
-			builder.Append("Rle count : ");
-			builder.Append(statistics.Rle);
-			builder.AppendLine();
+			for (int index = 0; index < channelCount; index++)
+			{
+				builder.Append("Channel length [");
+				builder.Append(index);
+				builder.Append("] : ");
+				builder.Append(TextConvertUtility.ToByteString(statistics.Length[index]));
+				builder.AppendLine();
+			}
 
 			for (var index = 0; index < statistics.Tables.Length; index++)
 			{

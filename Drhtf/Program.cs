@@ -140,7 +140,7 @@ namespace Drh
 			writer.Flush();
 
 			StatisticsUtility.WriteBitStatistics("Bit length", bitLength);
-			StatisticsUtility.WriteByteStatistics("Byte total", byteStatistics, writer.Length, byteLength);
+			StatisticsUtility.WriteByteStatistics("Byte total", byteStatistics, writer.Length, byteLength, channelCount);
 
 			var fileNameDrh = fileName + drhExtension;
 			if (File.Exists(fileNameDrh))

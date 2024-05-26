@@ -239,6 +239,8 @@ namespace DrhtfLib.Encoders
 
 				for (int channel = 0; channel < channelCount; channel++)
 				{
+					var length = writersStateH[channel].BitLength >> 3;
+
 					writer.WriteAndDispose(writersStateH[channel]);
 					writersStateV[channel].Dispose();
 					writersStateHV[channel].Dispose();
@@ -250,12 +252,13 @@ namespace DrhtfLib.Encoders
 					lock (byteStatistics)
 					{
 						byteStatistics.Tables[resultKindsH[channel]]++;
-						byteStatistics.Rle += resultRlesH[channel];
+						byteStatistics.Rle[channel] += resultRlesH[channel];
+						byteStatistics.Length[channel] += length;
 					}
 				}
 
 				lock (byteStatistics)
-					byteStatistics.DeltaH++;
+					byteStatistics.Delta[(int)deltaKind]++;
 			}
 			else if (deltaKind == DeltaKind.V)
 			{
@@ -263,6 +266,8 @@ namespace DrhtfLib.Encoders
 
 				for (int channel = 0; channel < channelCount; channel++)
 				{
+					var length = writersStateV[channel].BitLength >> 3;
+
 					writersStateH[channel].Dispose();
 					writer.WriteAndDispose(writersStateV[channel]);
 					writersStateHV[channel].Dispose();
@@ -274,12 +279,13 @@ namespace DrhtfLib.Encoders
 					lock (byteStatistics)
 					{
 						byteStatistics.Tables[resultKindsV[channel]]++;
-						byteStatistics.Rle += resultRlesV[channel];
+						byteStatistics.Rle[channel] += resultRlesV[channel];
+						byteStatistics.Length[channel] += length;
 					}
 				}
 
 				lock (byteStatistics)
-					byteStatistics.DeltaV++;
+					byteStatistics.Delta[(int)deltaKind]++;
 			}
 			else
 			{
@@ -287,6 +293,8 @@ namespace DrhtfLib.Encoders
 
 				for (int channel = 0; channel < channelCount; channel++)
 				{
+					var length = writersStateHV[channel].BitLength >> 3;
+
 					writersStateH[channel].Dispose();
 					writersStateV[channel].Dispose();
 					writer.WriteAndDispose(writersStateHV[channel]);
@@ -298,12 +306,13 @@ namespace DrhtfLib.Encoders
 					lock (byteStatistics)
 					{
 						byteStatistics.Tables[resultKindsHV[channel]]++;
-						byteStatistics.Rle += resultRlesHV[channel];
+						byteStatistics.Rle[channel] += resultRlesHV[channel];
+						byteStatistics.Length[channel] += length;
 					}
 				}
 
 				lock (byteStatistics)
-					byteStatistics.DeltaHV++;
+					byteStatistics.Delta[(int)deltaKind]++;
 			}
 
 			Array.Clear(resultKindsH, 0, resultKindsH.Length);

@@ -1,13 +1,13 @@
 ﻿using DrhLib.Compress;
+using DrhtfLib.Utility;
 
 namespace DrhLib.Statistics
 {
 	public class AlgorithmStatistics
 	{
 		public long[] Tables = new long[(int)AlgorithmKind.Count];
-		public long Rle;
-		public long DeltaH;
-		public long DeltaV;
-		public long DeltaHV;
+		public long[] Rle = new long[4];
+		public long[] Length = new long[4];
+		public long[] Delta = new long[(int)DeltaKind.Count];
 	}
 }

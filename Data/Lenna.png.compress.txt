@@ -11,10 +11,15 @@ Length : 981 891 ( 52 % )
 Bit length : 6 060 207 , length : 757 525 , part : 7
 Byte total
 Length : 757 530 ( 40 % )
-Delta H count : 71
-Delta V count : 120
-Delta HV count : 385
-Rle count : 54251
+Delta count [H] : 71
+Delta count [V] : 120
+Delta count [HV] : 385
+Channel rle count [0] : 26 701
+Channel rle count [1] : 404
+Channel rle count [2] : 27 146
+Channel length [0] : 198 473
+Channel length [1] : 351 744
+Channel length [2] : 206 447
 HA : 82
 SHA : 369
 RHA : 111
