@@ -5,9 +5,9 @@ using DrhtfLib.Commons;
 
 namespace DrhLib.Huffmans
 {
-    public static class EncodeTableUtility
+	public static class EncodeTableUtility
 	{
-		public static void EncodeH(IBitStreamWriter writer, Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, ChannelInfo info, IComputeRle rle, ref int rleCount)
+		public static void EncodeH(IBitStreamWriter writer, Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, ChannelInfo info, ComputeRle rle, ref int rleCount)
 		{
 			var rleEntry = info.RleCode;
 			var zeroEntry = info.Codes[0];
@@ -18,7 +18,7 @@ namespace DrhLib.Huffmans
 
 				if (value == 0)
 				{
-					if (!rle.IsStub)
+					if (rle != null)
 					{
 						if (rle.Compute(writer, values, channel, ref index, rleEntry, zeroEntry, ref rleCount))
 							continue;
@@ -30,7 +30,7 @@ namespace DrhLib.Huffmans
 			}
 		}
 
-		public static void EncodeSH(IBitStreamWriter writer, Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, ChannelInfo info, IComputeRle rle, ref int rleCount)
+		public static void EncodeSH(IBitStreamWriter writer, Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, ChannelInfo info, ComputeRle rle, ref int rleCount)
 		{
 			var rleEntry = info.RleCode;
 			var zeroEntry = info.Codes[0];
@@ -44,7 +44,7 @@ namespace DrhLib.Huffmans
 
 				if (value == 0)
 				{
-					if (!rle.IsStub)
+					if (rle != null)
 					{
 						if (rle.Compute(writer, values, channel, ref index, rleEntry, zeroEntry, ref rleCount))
 							continue;

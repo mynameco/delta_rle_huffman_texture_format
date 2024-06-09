@@ -12,7 +12,7 @@ namespace DrhLib.Huffmans
 
 		public int MinZeroCount = 3;
 
-		public void LoadFirstTable(IComputeRle rle)
+		public void LoadFirstTable(ComputeRle rle)
 		{
 			for (int index = 0; index < 256; index++)
 			{

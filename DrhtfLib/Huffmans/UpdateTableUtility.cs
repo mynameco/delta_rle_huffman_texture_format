@@ -6,7 +6,7 @@ namespace DrhLib.Huffmans
 {
 	public static class UpdateTableUtility
 	{
-		public static void PrepareTable(ChannelInfo info, IComputeRle rle)
+		public static void PrepareTable(ChannelInfo info, ComputeRle rle)
 		{
 			info.Pool.Reset();
 
@@ -19,7 +19,7 @@ namespace DrhLib.Huffmans
 				tmpCodes.Add(entry);
 			}
 
-			if (!rle.IsStub)
+			if (rle != null)
 				tmpCodes.Add(info.RleCode);
 		}
 
@@ -72,7 +72,7 @@ namespace DrhLib.Huffmans
 			return b.Count.CompareTo(a.Count);
 		}
 
-		public static void UpdateTableH(Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, ChannelInfo info, bool resetAll, ref int minZeroCount, IComputeRle rle)
+		public static void UpdateTableH(Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, ChannelInfo info, bool resetAll, ref int minZeroCount, ComputeRle rle)
 		{
 			if (resetAll)
 				info.Cleanup();
@@ -89,7 +89,7 @@ namespace DrhLib.Huffmans
 
 				if (value == 0)
 				{
-					if (!rle.IsStub)
+					if (rle != null)
 					{
 						var count = rle.GetCount(values, channel, index);
 						if (count >= minZeroCount)
@@ -108,13 +108,16 @@ namespace DrhLib.Huffmans
 
 			CodeEntryUtility.UpdateCodes(info);
 
-			var rleEntry = info.RleCode;
-			var zeroSize = info.Codes[0].Size;
-			var minCode = rleEntry.Size + rle.MinSize;
-			minZeroCount = minCode / zeroSize;
+			if (rle != null)
+			{
+				var rleEntry = info.RleCode;
+				var zeroSize = info.Codes[0].Size;
+				var minCode = rleEntry.Size + rle.MinSize;
+				minZeroCount = minCode / zeroSize;
+			}
 		}
 
-		public static void UpdateTableSH(Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, ChannelInfo info, bool resetAll, ref int minZeroCount, IComputeRle rle)
+		public static void UpdateTableSH(Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, ChannelInfo info, bool resetAll, ref int minZeroCount, ComputeRle rle)
 		{
 			if (resetAll)
 				info.Cleanup();
@@ -133,7 +136,7 @@ namespace DrhLib.Huffmans
 
 				if (value == 0)
 				{
-					if (!rle.IsStub)
+					if (rle != null)
 					{
 						var count = rle.GetCount(values, channel, index);
 						if (count >= minZeroCount)
@@ -172,10 +175,13 @@ namespace DrhLib.Huffmans
 
 			CodeEntryUtility.UpdateCodes(info);
 
-			var rleEntry = info.RleCode;
-			var zeroSize = info.Codes[0].Size;
-			var minCode = rleEntry.Size + rle.MinSize;
-			minZeroCount = minCode / zeroSize;
+			if (rle != null)
+			{
+				var rleEntry = info.RleCode;
+				var zeroSize = info.Codes[0].Size;
+				var minCode = rleEntry.Size + rle.MinSize;
+				minZeroCount = minCode / zeroSize;
+			}
 		}
 	}
 }

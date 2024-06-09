@@ -25,7 +25,7 @@ namespace DrhtfLib.Encoders
 
 		private Task[] tasks;
 
-		public Decoder(IComputeRle rle, int width, int height, int channelCount)
+		public Decoder(ComputeRle rle, int width, int height, int channelCount)
 		{
 			this.width = width;
 			this.height = height;

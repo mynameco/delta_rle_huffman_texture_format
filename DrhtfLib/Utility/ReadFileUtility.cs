@@ -41,7 +41,7 @@ namespace DrhLib.Utility
 
 		public static bool DecodePixels(
 			IBitStreamReader reader,
-			IComputeRle rle,
+			ComputeRle rle,
 			Color32[] pixels,
 			int width,
 			int height,

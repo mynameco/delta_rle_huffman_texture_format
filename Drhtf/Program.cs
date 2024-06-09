@@ -108,11 +108,9 @@ namespace Drh
 				writer = new ByteStatisticWriter();
 			}
 
-			IComputeRle rle;
+			ComputeRle rle = null;
 			if (useRle)
 				rle = new ComputeRle();
-			else
-				rle = new StubRle();
 
 			var byteStatistics = new AlgorithmStatistics();
 
@@ -179,11 +177,9 @@ namespace Drh
 			var bytes = File.ReadAllBytes(fileName + drhExtension);
 			var reader = new BitStreamReader(bytes, bytes.LongLength << 3);
 
-			IComputeRle rle;
+			ComputeRle rle = null;
 			if (useRle)
 				rle = new ComputeRle();
-			else
-				rle = new StubRle();
 
 			if (!ReadFileUtility.ReadHeader(
 				reader,

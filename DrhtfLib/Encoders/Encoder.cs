@@ -36,7 +36,7 @@ namespace DrhtfLib.Encoders
 		private int[] resultRlesV;
 		private int[] resultRlesHV;
 
-		public Encoder(IComputeRle rle, int width, int height, int channelCount)
+		public Encoder(ComputeRle rle, int width, int height, int channelCount)
 		{
 			this.width = width;
 			this.height = height;

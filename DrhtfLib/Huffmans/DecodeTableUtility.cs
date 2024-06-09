@@ -5,15 +5,19 @@ using DrhtfLib.Commons;
 
 namespace DrhLib.Huffmans
 {
-    public static class DecodeTableUtility
+	public static class DecodeTableUtility
 	{
-		public static void DecodeH(IBitStreamReader reader, Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, ChannelInfo info, IComputeRle rle)
+		public static void DecodeH(IBitStreamReader reader, Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, ChannelInfo info, ComputeRle rle)
 		{
 			var rleEntry = info.RleCode;
 			var zeroEntry = info.Codes[0];
 
-			var minCode = rleEntry.Size + rle.MinSize;
-			var minCodeCount = minCode / zeroEntry.Size;
+			var minCodeCount = 0;
+			if (rle != null)
+			{
+				var minCode = rleEntry.Size + rle.MinSize;
+				minCodeCount = minCode / zeroEntry.Size;
+			}
 
 			var entry = info.TmpCodes[0];
 
@@ -33,13 +37,17 @@ namespace DrhLib.Huffmans
 			}
 		}
 
-		public static void DecodeSH(IBitStreamReader reader, Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, ChannelInfo info, IComputeRle rle)
+		public static void DecodeSH(IBitStreamReader reader, Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, ChannelInfo info, ComputeRle rle)
 		{
 			var rleEntry = info.RleCode;
 			var zeroEntry = info.Codes[0];
 
-			var minCode = rleEntry.Size + rle.MinSize;
-			var minCodeCount = minCode / zeroEntry.Size;
+			var minCodeCount = 0;
+			if (rle != null)
+			{
+				var minCode = rleEntry.Size + rle.MinSize;
+				minCodeCount = minCode / zeroEntry.Size;
+			}
 
 			var entry = info.TmpCodes[0];
 

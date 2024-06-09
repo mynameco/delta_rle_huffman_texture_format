@@ -5,14 +5,15 @@ using DrhtfLib.Commons;
 
 namespace DrhLib.Compress.Algorithms
 {
-    public class Algorithm_SH :
+	public class Algorithm_SH :
 		ICompressAlgorithm
 	{
-		private IComputeRle rle;
+		private ComputeRle rle;
 		private bool resetAll;
+
 		private ChannelInfo[] infos;
 
-		public Algorithm_SH(IComputeRle rle, int channelCount, bool resetAll)
+		public Algorithm_SH(ComputeRle rle, int channelCount, bool resetAll)
 		{
 			this.rle = rle;
 			this.resetAll = resetAll;

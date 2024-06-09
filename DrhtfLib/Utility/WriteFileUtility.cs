@@ -33,7 +33,7 @@ namespace DrhLib.Utility
 
 		public static void EncodePixels(
 			IByteStreamWriter writer,
-			IComputeRle rle,
+			ComputeRle rle,
 			Color32[] pixels,
 			int width,
 			int height,
