@@ -8,7 +8,7 @@ Original png file length :
 Length : 981 891 ( 52 % )
 
 ----------------------------------------------------------
-Bit length : 6 060 211 , length : 757 526 , part : 3
+Bit length : 6 060 207 , length : 757 525 , part : 7
 Byte total
 Length : 757 530 ( 40 % )
 
@@ -16,7 +16,7 @@ Delta count [H] : 71
 Delta count [V] : 120
 Delta count [HV] : 385
 
-Channel rle count [0] : 26 699
+Channel rle count [0] : 26 701
 Channel rle count [1] : 404
 Channel rle count [2] : 27 146
 
