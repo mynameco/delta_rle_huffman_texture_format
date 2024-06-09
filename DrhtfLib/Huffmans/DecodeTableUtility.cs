@@ -20,6 +20,7 @@ namespace DrhLib.Huffmans
 			}
 
 			var prevRle = false;
+			var prevZero = false;
 
 			for (int index = 0; index < values.Length; index++)
 			{
@@ -29,12 +30,17 @@ namespace DrhLib.Huffmans
 					code = table2.GetCode(reader);
 					prevRle = false;
 				}
+				else if (prevZero)
+				{
+					code = table3.GetCode(reader);
+				}
 				else
 				{
 					code = table.GetCode(reader);
 				}
 
-				if (code == rleEntry)
+				if (code == rleEntry &&
+					!prevZero)
 				{
 					var count = (int)rle.Read(reader);
 					index += count + minCodeCount;
@@ -42,8 +48,13 @@ namespace DrhLib.Huffmans
 					continue;
 				}
 
-				var bb = (byte)code.Index;
-				values[index][channel] = bb;
+				var value = (byte)code.Index;
+				values[index][channel] = value;
+
+				if (value == 0)
+					prevZero = true;
+				else
+					prevZero = false;
 			}
 		}
 
@@ -61,6 +72,7 @@ namespace DrhLib.Huffmans
 
 			var prevSign = false;
 			var prevRle = false;
+			var prevZero = false;
 
 			for (int index = 0; index < values.Length; index++)
 			{
@@ -70,12 +82,17 @@ namespace DrhLib.Huffmans
 					code = table2.GetCode(reader);
 					prevRle = false;
 				}
+				else if (prevZero)
+				{
+					code = table3.GetCode(reader);
+				}
 				else
 				{
 					code = table.GetCode(reader);
 				}
 
-				if (code == rleEntry)
+				if (code == rleEntry &&
+					!prevZero)
 				{
 					var count = (int)rle.Read(reader);
 					index += count + minCodeCount;
@@ -84,11 +101,13 @@ namespace DrhLib.Huffmans
 				}
 				else if (code.Index == 0)
 				{
+					prevZero = true;
 					continue;
 				}
 				else if (code.Index == 128)
 				{
 					values[index][channel] = 128;
+					prevZero = false;
 					continue;
 				}
 
@@ -108,8 +127,10 @@ namespace DrhLib.Huffmans
 						value = -value;
 				}
 
-				var bb = (byte)value;
-				values[index][channel] = bb;
+				value = (byte)value;
+				values[index][channel] = (byte)value;
+
+				prevZero = false;
 			}
 		}
 	}

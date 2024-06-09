@@ -24,6 +24,8 @@ namespace Drh
 		private static bool writeDrhMemory = true;
 		private static bool writeDrhPngFile = true;
 
+		private static int version = 2;
+
 		static void Main(string[] args)
 		{
 			if (args.Length > 0)
@@ -114,7 +116,6 @@ namespace Drh
 
 			var byteStatistics = new AlgorithmStatistics();
 
-			var version = 1;
 			WriteFileUtility.WriteHeader(
 				writer,
 				version,
@@ -183,7 +184,8 @@ namespace Drh
 
 			if (!ReadFileUtility.ReadHeader(
 				reader,
-				out var version,
+				version,
+				out var hasVersion,
 				out var width,
 				out var height,
 				out var hasAlpha))
@@ -194,7 +196,8 @@ namespace Drh
 			}
 
 			Logger.WriteLine(
-				"Version : " + version +
+				"Need version : " + version +
+				" , Has version : " + hasVersion +
 				" , Width : " + width +
 				" , Height : " + height +
 				" , Has alpha : " + hasAlpha);

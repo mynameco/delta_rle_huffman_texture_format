@@ -9,6 +9,7 @@ namespace DrhLib.Utility
 	{
 		public static bool ReadHeader(
 			IBitStreamReader reader,
+			int needVersion,
 			out int version,
 			out int width,
 			out int height,
@@ -32,6 +33,9 @@ namespace DrhLib.Utility
 				return false;
 
 			version = (int)Number4Utility.Read(reader);
+			if (version != needVersion)
+				return false;
+
 			width = (int)Number7Utility.Read(reader);
 			height = (int)Number7Utility.Read(reader);
 			hasAlpha = reader.Read();

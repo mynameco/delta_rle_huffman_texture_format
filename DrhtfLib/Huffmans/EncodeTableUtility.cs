@@ -32,11 +32,19 @@ namespace DrhLib.Huffmans
 					}
 				}
 
-				var entry = table.GetEntry(value);
+				CodeEntry entry = null;
 				if (prevRle)
 				{
 					entry = table2.GetEntry(value);
 					prevRle = false;
+				}
+				else if (prevZero)
+				{
+					entry = table3.GetEntry(value);
+				}
+				else
+				{
+					entry = table.GetEntry(value);
 				}
 
 				writer.Write(entry.Code, entry.Size);
@@ -92,12 +100,20 @@ namespace DrhLib.Huffmans
 					}
 				}
 
-				var bbb = (byte)value;
-				var entry = table.GetEntry(bbb);
+				value = (byte)value;
+				CodeEntry entry = null;
 				if (prevRle)
 				{
-					entry = table2.GetEntry(bbb);
+					entry = table2.GetEntry(value);
 					prevRle = false;
+				}
+				else if (prevZero)
+				{
+					entry = table3.GetEntry(value);
+				}
+				else
+				{
+					entry = table.GetEntry(value);
 				}
 
 				writer.Write(entry.Code, entry.Size);
