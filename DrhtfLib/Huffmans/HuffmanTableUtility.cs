@@ -5,7 +5,7 @@ namespace DrhtfLib.Huffmans
 {
 	public static class HuffmanTableUtility
 	{
-		public static void LoadFirstTable(HuffmanTable table, ComputeRle rle)
+		public static void LoadDefaultTable(HuffmanTable table, ComputeRle rle)
 		{
 			PrepareTable(table, rle);
 
@@ -30,26 +30,26 @@ namespace DrhtfLib.Huffmans
 			}
 		}
 
-		public static void PrepareTable(HuffmanTable info, ComputeRle rle)
+		public static void PrepareTable(HuffmanTable table, ComputeRle rle)
 		{
-			info.Pool.Reset();
+			table.Pool.Reset();
 
-			var tmpCodes = info.TmpCodes;
+			var tmpCodes = table.TmpCodes;
 			tmpCodes.Clear();
 
-			for (int index = 0; index < info.Codes.Count; index++)
+			for (int index = 0; index < table.Codes.Count; index++)
 			{
-				var entry = info.Codes[index];
+				var entry = table.Codes[index];
 				tmpCodes.Add(entry);
 			}
 
 			if (rle != null)
-				tmpCodes.Add(info.RleCode);
+				tmpCodes.Add(table.RleCode);
 		}
 
-		public static void ComputeTable(HuffmanTable info)
+		public static void ComputeTable(HuffmanTable table)
 		{
-			var tmpCodes = info.TmpCodes;
+			var tmpCodes = table.TmpCodes;
 
 			tmpCodes.Sort(SortCodeEntry);
 
@@ -64,7 +64,7 @@ namespace DrhtfLib.Huffmans
 			while (tmpCodes.Count > 1)
 			{
 				var lastIndex = tmpCodes.Count - 1;
-				var entry = info.Pool.Get();
+				var entry = table.Pool.Get();
 
 				entry.Entry0 = tmpCodes[lastIndex - 1];
 				entry.Entry1 = tmpCodes[lastIndex];
@@ -74,13 +74,13 @@ namespace DrhtfLib.Huffmans
 
 				entry.Count = entry.Entry0.Count + entry.Entry1.Count;
 
-				CodeEntryUtility.UpLastEntry(info, entry, zeroStartIndex);
+				CodeEntryUtility.UpLastEntry(table, entry, zeroStartIndex);
 			}
 		}
 
-		public static void UpdateCodes(HuffmanTable info)
+		public static void UpdateCodes(HuffmanTable table)
 		{
-			var codeEntry = info.TmpCodes[0];
+			var codeEntry = table.TmpCodes[0];
 			codeEntry.Code = 0;
 			codeEntry.Size = 0;
 

@@ -7,16 +7,16 @@ namespace DrhLib.Huffmans
 {
 	public static class UpdateTableUtility
 	{
-		public static void UpdateTableH(Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, HuffmanTable info, bool resetAll, ref int minZeroCount, ComputeRle rle)
+		public static void UpdateTableH(Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, HuffmanTable table, bool resetAll, ref int minZeroCount, ComputeRle rle)
 		{
 			if (resetAll)
-				info.Cleanup();
+				table.Cleanup();
 			else
-				info.CleanupWithoutCount();
+				table.CleanupWithoutCount();
 
-			HuffmanTableUtility.PrepareTable(info, rle);
+			HuffmanTableUtility.PrepareTable(table, rle);
 
-			var tmpCodes = info.TmpCodes;
+			var tmpCodes = table.TmpCodes;
 
 			for (int index = 0; index < values.Length; index++)
 			{
@@ -29,7 +29,7 @@ namespace DrhLib.Huffmans
 						var count = rle.GetCount(values, channel, index);
 						if (count >= minZeroCount)
 						{
-							info.RleCode.Count++;
+							table.RleCode.Count++;
 							index += count - 1;
 							continue;
 						}
@@ -39,31 +39,31 @@ namespace DrhLib.Huffmans
 				tmpCodes[value].Count++;
 			}
 
-			HuffmanTableUtility.ComputeTable(info);
+			HuffmanTableUtility.ComputeTable(table);
 
-			HuffmanTableUtility.UpdateCodes(info);
+			HuffmanTableUtility.UpdateCodes(table);
 
 			if (rle != null)
 			{
-				var rleEntry = info.RleCode;
-				var zeroSize = info.Codes[0].Size;
+				var rleEntry = table.RleCode;
+				var zeroSize = table.Codes[0].Size;
 				var minCode = rleEntry.Size + rle.MinSize;
 				minZeroCount = minCode / zeroSize;
 			}
 		}
 
-		public static void UpdateTableSH(Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, HuffmanTable info, bool resetAll, ref int minZeroCount, ComputeRle rle)
+		public static void UpdateTableSH(Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, HuffmanTable table, bool resetAll, ref int minZeroCount, ComputeRle rle)
 		{
 			if (resetAll)
-				info.Cleanup();
+				table.Cleanup();
 			else
-				info.CleanupWithoutCount();
+				table.CleanupWithoutCount();
 
-			HuffmanTableUtility.PrepareTable(info, rle);
+			HuffmanTableUtility.PrepareTable(table, rle);
 
 			var prevSign = false;
 
-			var tmpCodes = info.TmpCodes;
+			var tmpCodes = table.TmpCodes;
 
 			for (int index = 0; index < values.Length; index++)
 			{
@@ -76,7 +76,7 @@ namespace DrhLib.Huffmans
 						var count = rle.GetCount(values, channel, index);
 						if (count >= minZeroCount)
 						{
-							info.RleCode.Count++;
+							table.RleCode.Count++;
 							index += count - 1;
 							continue;
 						}
@@ -106,14 +106,14 @@ namespace DrhLib.Huffmans
 				tmpCodes[value].Count++;
 			}
 
-			HuffmanTableUtility.ComputeTable(info);
+			HuffmanTableUtility.ComputeTable(table);
 
-			HuffmanTableUtility.UpdateCodes(info);
+			HuffmanTableUtility.UpdateCodes(table);
 
 			if (rle != null)
 			{
-				var rleEntry = info.RleCode;
-				var zeroSize = info.Codes[0].Size;
+				var rleEntry = table.RleCode;
+				var zeroSize = table.Codes[0].Size;
 				var minCode = rleEntry.Size + rle.MinSize;
 				minZeroCount = minCode / zeroSize;
 			}

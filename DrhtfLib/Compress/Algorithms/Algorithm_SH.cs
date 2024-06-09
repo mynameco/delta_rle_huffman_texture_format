@@ -12,41 +12,41 @@ namespace DrhLib.Compress.Algorithms
 		private ComputeRle rle;
 		private bool resetAll;
 
-		private HuffmanTable[] infos;
+		private HuffmanTable[] tables;
 
 		public Algorithm_SH(ComputeRle rle, int channelCount, bool resetAll)
 		{
 			this.rle = rle;
 			this.resetAll = resetAll;
 
-			infos = new HuffmanTable[channelCount];
+			tables = new HuffmanTable[channelCount];
 
-			for (int index = 0; index < infos.Length; index++)
+			for (int index = 0; index < tables.Length; index++)
 			{
-				infos[index] = new HuffmanTable(256);
-				HuffmanTableUtility.LoadFirstTable(infos[index], rle);
+				tables[index] = new HuffmanTable(256);
+				HuffmanTableUtility.LoadDefaultTable(tables[index], rle);
 			}
 		}
 
 		public void Write(IBitStreamWriter writer, Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, ref int rleCount)
 		{
-			var info = infos[channel];
+			var table = tables[channel];
 
-			EncodeTableUtility.EncodeSH(writer, values, channel, lineIndex, kind, info, rle, ref rleCount);
+			EncodeTableUtility.EncodeSH(writer, values, channel, lineIndex, kind, table, rle, ref rleCount);
 		}
 
 		public void Read(IBitStreamReader reader, Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind)
 		{
-			var info = infos[channel];
+			var table = tables[channel];
 
-			DecodeTableUtility.DecodeSH(reader, values, channel, lineIndex, kind, info, rle);
+			DecodeTableUtility.DecodeSH(reader, values, channel, lineIndex, kind, table, rle);
 		}
 
 		public void UpdateTable(Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind)
 		{
-			var info = infos[channel];
+			var table = tables[channel];
 
-			UpdateTableUtility.UpdateTableSH(values, channel, lineIndex, kind, info, resetAll, ref info.MinZeroCount, rle);
+			UpdateTableUtility.UpdateTableSH(values, channel, lineIndex, kind, table, resetAll, ref table.MinZeroCount, rle);
 		}
 	}
 }

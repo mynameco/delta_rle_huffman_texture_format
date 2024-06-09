@@ -4,9 +4,9 @@ namespace DrhLib.Huffmans
 {
 	public static class CodeEntryUtility
 	{
-		public static void UpLastEntry(HuffmanTable info, CodeEntry entry, int zeroStartIndex)
+		public static void UpLastEntry(HuffmanTable table, CodeEntry entry, int zeroStartIndex)
 		{
-			var tmpCodes = info.TmpCodes;
+			var tmpCodes = table.TmpCodes;
 			var lastIndex = tmpCodes.Count;
 
 			if (entry.Count == 0)

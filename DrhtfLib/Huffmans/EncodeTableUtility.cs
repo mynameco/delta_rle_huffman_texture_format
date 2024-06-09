@@ -7,10 +7,10 @@ namespace DrhLib.Huffmans
 {
 	public static class EncodeTableUtility
 	{
-		public static void EncodeH(IBitStreamWriter writer, Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, HuffmanTable info, ComputeRle rle, ref int rleCount)
+		public static void EncodeH(IBitStreamWriter writer, Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, HuffmanTable table, ComputeRle rle, ref int rleCount)
 		{
-			var rleEntry = info.RleCode;
-			var zeroEntry = info.Codes[0];
+			var rleEntry = table.RleCode;
+			var zeroEntry = table.Codes[0];
 
 			for (int index = 0; index < values.Length; index++)
 			{
@@ -25,15 +25,15 @@ namespace DrhLib.Huffmans
 					}
 				}
 
-				var entry = info.Codes[value];
+				var entry = table.Codes[value];
 				writer.Write(entry.Code, entry.Size);
 			}
 		}
 
-		public static void EncodeSH(IBitStreamWriter writer, Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, HuffmanTable info, ComputeRle rle, ref int rleCount)
+		public static void EncodeSH(IBitStreamWriter writer, Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, HuffmanTable table, ComputeRle rle, ref int rleCount)
 		{
-			var rleEntry = info.RleCode;
-			var zeroEntry = info.Codes[0];
+			var rleEntry = table.RleCode;
+			var zeroEntry = table.Codes[0];
 
 			var prevSign = false;
 
@@ -67,7 +67,7 @@ namespace DrhLib.Huffmans
 				}
 
 				var bbb = (byte)value;
-				var entry = info.Codes[bbb];
+				var entry = table.Codes[bbb];
 				writer.Write(entry.Code, entry.Size);
 			}
 		}
