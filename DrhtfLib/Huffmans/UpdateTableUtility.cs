@@ -41,8 +41,6 @@ namespace DrhLib.Huffmans
 
 			HuffmanTableUtility.ComputeTable(table);
 
-			HuffmanTableUtility.UpdateCodes(table);
-
 			if (rle != null)
 			{
 				var rleEntry = table.RleCode;
@@ -107,8 +105,6 @@ namespace DrhLib.Huffmans
 			}
 
 			HuffmanTableUtility.ComputeTable(table);
-
-			HuffmanTableUtility.UpdateCodes(table);
 
 			if (rle != null)
 			{

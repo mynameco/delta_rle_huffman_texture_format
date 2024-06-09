@@ -21,8 +21,6 @@ namespace DrhtfLib.Huffmans
 
 			ComputeTable(table);
 
-			UpdateCodes(table);
-
 			for (int index = max; index >= 0; index--)
 			{
 				table.Codes[index].Count = 0;
@@ -76,10 +74,7 @@ namespace DrhtfLib.Huffmans
 
 				CodeEntryUtility.UpLastEntry(table, entry, zeroStartIndex);
 			}
-		}
 
-		public static void UpdateCodes(HuffmanTable table)
-		{
 			var codeEntry = table.TmpCodes[0];
 			codeEntry.Code = 0;
 			codeEntry.Size = 0;
