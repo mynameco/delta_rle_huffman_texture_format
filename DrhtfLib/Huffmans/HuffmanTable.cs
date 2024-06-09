@@ -39,7 +39,7 @@ namespace DrhLib.Huffmans
 			RleCode.Cleanup();
 		}
 
-		public void CleanupWithoutCount()
+		private void CleanupWithoutCount()
 		{
 			for (int index = 0; index < Codes.Count; index++)
 			{
@@ -71,7 +71,7 @@ namespace DrhLib.Huffmans
 				TmpCodes.Add(RleCode);
 		}
 
-		public void ComputeTable()
+		public void ComputeTable(ComputeRle rle)
 		{
 			TmpCodes.Sort(SortCodeEntry);
 
@@ -104,6 +104,14 @@ namespace DrhLib.Huffmans
 			codeEntry.Size = 0;
 
 			UpdateCodesInternal(codeEntry);
+
+			if (rle != null)
+			{
+				var rleEntry = RleCode;
+				var zeroSize = Codes[0].Size;
+				var minCode = rleEntry.Size + rle.MinSize;
+				MinZeroCount = minCode / zeroSize;
+			}
 		}
 
 		private static void UpdateCodesInternal(CodeEntry codeEntry)

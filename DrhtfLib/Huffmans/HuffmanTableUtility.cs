@@ -19,13 +19,9 @@ namespace DrhtfLib.Huffmans
 				count <<= 1;
 			}
 
-			table.ComputeTable();
+			table.ComputeTable(null);
 
-			for (int index = max; index >= 0; index--)
-			{
-				table.Codes[index].Count = 0;
-				table.Codes[(byte)-index].Count = 0;
-			}
+			table.Cleanup();
 		}
 	}
 }

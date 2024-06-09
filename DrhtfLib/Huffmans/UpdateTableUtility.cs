@@ -33,15 +33,7 @@ namespace DrhLib.Huffmans
 				tmpCodes[value].Count++;
 			}
 
-			table.ComputeTable();
-
-			if (rle != null)
-			{
-				var rleEntry = table.RleCode;
-				var zeroSize = table.Codes[0].Size;
-				var minCode = rleEntry.Size + rle.MinSize;
-				minZeroCount = minCode / zeroSize;
-			}
+			table.ComputeTable(rle);
 		}
 
 		public static void UpdateTableSH(Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, HuffmanTable table, bool resetAll, ref int minZeroCount, ComputeRle rle)
@@ -93,15 +85,7 @@ namespace DrhLib.Huffmans
 				tmpCodes[value].Count++;
 			}
 
-			table.ComputeTable();
-
-			if (rle != null)
-			{
-				var rleEntry = table.RleCode;
-				var zeroSize = table.Codes[0].Size;
-				var minCode = rleEntry.Size + rle.MinSize;
-				minZeroCount = minCode / zeroSize;
-			}
+			table.ComputeTable(rle);
 		}
 	}
 }
