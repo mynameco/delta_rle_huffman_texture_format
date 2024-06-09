@@ -50,8 +50,13 @@ namespace DrhLib.Huffmans
 			RleCode.CleanupWithoutCount();
 		}
 
-		public void PrepareTable(ComputeRle rle)
+		public void PrepareTable(ComputeRle rle, bool resetAll)
 		{
+			if (resetAll)
+				Cleanup();
+			else
+				CleanupWithoutCount();
+
 			Pool.Reset();
 
 			TmpCodes.Clear();

@@ -7,7 +7,7 @@ namespace DrhtfLib.Huffmans
 	{
 		public static void LoadDefaultTable(HuffmanTable table, ComputeRle rle)
 		{
-			table.PrepareTable(rle);
+			table.PrepareTable(rle, true);
 
 			var max = 16;
 			var count = 1;

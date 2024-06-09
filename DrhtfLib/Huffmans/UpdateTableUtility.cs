@@ -8,12 +8,7 @@ namespace DrhLib.Huffmans
 	{
 		public static void UpdateTableH(Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, HuffmanTable table, bool resetAll, ref int minZeroCount, ComputeRle rle)
 		{
-			if (resetAll)
-				table.Cleanup();
-			else
-				table.CleanupWithoutCount();
-
-			table.PrepareTable(rle);
+			table.PrepareTable(rle, resetAll);
 
 			var tmpCodes = table.TmpCodes;
 
@@ -51,12 +46,7 @@ namespace DrhLib.Huffmans
 
 		public static void UpdateTableSH(Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, HuffmanTable table, bool resetAll, ref int minZeroCount, ComputeRle rle)
 		{
-			if (resetAll)
-				table.Cleanup();
-			else
-				table.CleanupWithoutCount();
-
-			table.PrepareTable(rle);
+			table.PrepareTable(rle, resetAll);
 
 			var prevSign = false;
 
