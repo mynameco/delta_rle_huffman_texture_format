@@ -13,17 +13,26 @@ namespace DrhLib.Compress.Algorithms
 		private bool resetAll;
 
 		private HuffmanTable[] tables;
+		private HuffmanTable[] tables2;
+		private HuffmanTable[] tables3;
 
 		public Algorithm_H(ComputeRle rle, int channelCount, bool resetAll)
 		{
 			this.rle = rle;
 			this.resetAll = resetAll;
 
+			CreateTables(ref tables, rle, channelCount, 256);
+			CreateTables(ref tables2, null, channelCount, 256);
+			CreateTables(ref tables3, null, channelCount, 256);
+		}
+
+		private static void CreateTables(ref HuffmanTable[] tables, ComputeRle rle, int channelCount, int count)
+		{
 			tables = new HuffmanTable[channelCount];
 
 			for (int index = 0; index < tables.Length; index++)
 			{
-				tables[index] = new HuffmanTable(256);
+				tables[index] = new HuffmanTable(count);
 				HuffmanTableUtility.LoadDefaultTable(tables[index], rle);
 			}
 		}
@@ -45,8 +54,10 @@ namespace DrhLib.Compress.Algorithms
 		public void UpdateTable(Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind)
 		{
 			var table = tables[channel];
+			var table2 = tables2[channel];
+			var table3 = tables3[channel];
 
-			UpdateTableUtility.UpdateTableH(values, channel, lineIndex, kind, table, resetAll, rle);
+			UpdateTableUtility.UpdateTableH(values, channel, lineIndex, kind, table, true, resetAll, rle);
 		}
 	}
 }

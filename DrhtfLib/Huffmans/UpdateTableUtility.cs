@@ -6,7 +6,7 @@ namespace DrhLib.Huffmans
 {
 	public static class UpdateTableUtility
 	{
-		public static void UpdateTableH(Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, HuffmanTable table, bool resetAll, ComputeRle rle)
+		public static void UpdateTableH(Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, HuffmanTable table, bool needZero, bool resetAll, ComputeRle rle)
 		{
 			table.PrepareTable(rle, resetAll);
 
@@ -16,6 +16,9 @@ namespace DrhLib.Huffmans
 
 				if (value == 0)
 				{
+					if (!needZero)
+						continue;
+
 					if (rle != null)
 					{
 						var count = rle.GetCount(values, channel, index);
@@ -34,7 +37,7 @@ namespace DrhLib.Huffmans
 			table.ComputeTable(rle);
 		}
 
-		public static void UpdateTableSH(Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, HuffmanTable table, bool resetAll, ComputeRle rle)
+		public static void UpdateTableSH(Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, HuffmanTable table, bool needZero, bool resetAll, ComputeRle rle)
 		{
 			table.PrepareTable(rle, resetAll);
 
@@ -46,6 +49,9 @@ namespace DrhLib.Huffmans
 
 				if (value == 0)
 				{
+					if (!needZero)
+						continue;
+
 					if (rle != null)
 					{
 						var count = rle.GetCount(values, channel, index);

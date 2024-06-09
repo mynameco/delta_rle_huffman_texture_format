@@ -50,7 +50,9 @@ namespace DrhLib.Huffmans
 							continue;
 					}
 				}
-				else if (value != -128)
+
+				if (value != 0 &&
+					value != -128)
 				{
 					var sign = value < 0;
 					if (prevSign != sign)
