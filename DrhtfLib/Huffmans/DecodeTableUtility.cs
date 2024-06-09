@@ -19,11 +19,9 @@ namespace DrhLib.Huffmans
 				minCodeCount = minCode / zeroEntry.Size;
 			}
 
-			var entry = table.TmpCodes[0];
-
 			for (int index = 0; index < values.Length; index++)
 			{
-				var code = CodeEntryUtility.GetCode(reader, entry);
+				var code = table.GetCode(reader);
 
 				if (code == rleEntry)
 				{
@@ -49,13 +47,11 @@ namespace DrhLib.Huffmans
 				minCodeCount = minCode / zeroEntry.Size;
 			}
 
-			var entry = table.TmpCodes[0];
-
 			var prevSign = false;
 
 			for (int index = 0; index < values.Length; index++)
 			{
-				var code = CodeEntryUtility.GetCode(reader, entry);
+				var code = table.GetCode(reader);
 
 				if (code == rleEntry)
 				{

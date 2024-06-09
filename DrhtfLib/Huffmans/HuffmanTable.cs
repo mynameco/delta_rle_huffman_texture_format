@@ -1,4 +1,5 @@
 ﻿using DrhLib.Rles;
+using DrhLib.Streams;
 
 namespace DrhLib.Huffmans
 {
@@ -176,6 +177,20 @@ namespace DrhLib.Huffmans
 			}
 
 			TmpCodes.Insert(insertIndex, entry);
+		}
+
+		public CodeEntry GetCode(IBitStreamReader reader)
+		{
+			var entry = TmpCodes[0];
+
+			while (true)
+			{
+				if (entry.Index != -1)
+					return entry;
+
+				var value = reader.Read();
+				entry = value ? entry.Entry1 : entry.Entry0;
+			}
 		}
 	}
 }
