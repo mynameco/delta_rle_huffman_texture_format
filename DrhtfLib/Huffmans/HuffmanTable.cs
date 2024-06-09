@@ -197,5 +197,10 @@ namespace DrhLib.Huffmans
 				entry = value ? entry.Entry1 : entry.Entry0;
 			}
 		}
+
+		public void AddCount(int index, int count = 1)
+		{
+			Codes[index].Count += count;
+		}
 	}
 }

@@ -9,12 +9,13 @@ namespace DrhtfLib.Huffmans
 		{
 			table.PrepareTable(rle, true);
 
+			// TODO для нуля два раза добавляется, любые изменения тут, скачет размер
 			var max = 16;
 			var count = 1;
 			for (int index = max; index >= 0; index--)
 			{
-				table.Codes[index].Count = count;
-				table.Codes[(byte)-index].Count = count;
+				table.AddCount(index, count);
+				table.AddCount((byte)-index, count);
 
 				count <<= 1;
 			}
