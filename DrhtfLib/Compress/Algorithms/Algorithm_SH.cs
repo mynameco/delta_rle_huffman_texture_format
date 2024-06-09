@@ -63,7 +63,7 @@ namespace DrhLib.Compress.Algorithms
 
 			UpdateTableUtility.UpdateTableSH(values, channel, lineIndex, kind, table, true, resetAll, rle);
 			UpdateTableUtility.UpdateTableSH(values, channel, lineIndex, kind, table2, false, resetAll, null);
-			UpdateTableUtility.UpdateTableSH(values, channel, lineIndex, kind, table3, false, resetAll, rle);
+			UpdateTableUtility.UpdateTableSH(values, channel, lineIndex, kind, table3, true, resetAll, null);
 		}
 	}
 }
