@@ -5,19 +5,19 @@ namespace DrhLib.Huffmans
 {
 	public class HuffmanTable
 	{
-		public List<CodeEntry> Codes;
-		public List<CodeEntry> TmpCodes;
+		private List<CodeEntry> codes;
+		private List<CodeEntry> TmpCodes;
 
 		private CodeEntryPool pool;
 
-		public CodeEntry ZeroCode => Codes[0];
+		public CodeEntry ZeroCode => codes[0];
 		public CodeEntry RleCode { get; private set; }
 
 		public int MinZeroCount { get; private set; } = 3;
 
 		public HuffmanTable(int count)
 		{
-			Codes = new List<CodeEntry>(count);
+			codes = new List<CodeEntry>(count);
 			TmpCodes = new List<CodeEntry>(count + 1);
 			RleCode = new CodeEntry() { Index = 1001 };
 
@@ -27,20 +27,39 @@ namespace DrhLib.Huffmans
 			{
 				var code = new CodeEntry();
 				code.Index = index;
-				Codes.Add(code);
+				codes.Add(code);
 			}
 		}
 
 		public CodeEntry GetEntry(int index)
 		{
-			return Codes[index];
+			return codes[index];
+		}
+
+		public CodeEntry GetCode(IBitStreamReader reader)
+		{
+			var entry = TmpCodes[0];
+
+			while (true)
+			{
+				if (entry.Index != -1)
+					return entry;
+
+				var value = reader.Read();
+				entry = value ? entry.Entry1 : entry.Entry0;
+			}
+		}
+
+		public void AddCount(int index, int count = 1)
+		{
+			TmpCodes[index].Count += count;
 		}
 
 		public void Cleanup()
 		{
-			for (int index = 0; index < Codes.Count; index++)
+			for (int index = 0; index < codes.Count; index++)
 			{
-				var code = Codes[index];
+				var code = codes[index];
 				code.Cleanup();
 			}
 
@@ -49,9 +68,9 @@ namespace DrhLib.Huffmans
 
 		private void CleanupWithoutCount()
 		{
-			for (int index = 0; index < Codes.Count; index++)
+			for (int index = 0; index < codes.Count; index++)
 			{
-				var code = Codes[index];
+				var code = codes[index];
 				code.CleanupWithoutCount();
 			}
 
@@ -69,9 +88,9 @@ namespace DrhLib.Huffmans
 
 			TmpCodes.Clear();
 
-			for (int index = 0; index < Codes.Count; index++)
+			for (int index = 0; index < codes.Count; index++)
 			{
-				var entry = Codes[index];
+				var entry = codes[index];
 				TmpCodes.Add(entry);
 			}
 
@@ -182,25 +201,6 @@ namespace DrhLib.Huffmans
 			}
 
 			TmpCodes.Insert(insertIndex, entry);
-		}
-
-		public CodeEntry GetCode(IBitStreamReader reader)
-		{
-			var entry = TmpCodes[0];
-
-			while (true)
-			{
-				if (entry.Index != -1)
-					return entry;
-
-				var value = reader.Read();
-				entry = value ? entry.Entry1 : entry.Entry0;
-			}
-		}
-
-		public void AddCount(int index, int count = 1)
-		{
-			Codes[index].Count += count;
 		}
 	}
 }

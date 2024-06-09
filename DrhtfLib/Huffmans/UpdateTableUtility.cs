@@ -10,8 +10,6 @@ namespace DrhLib.Huffmans
 		{
 			table.PrepareTable(rle, resetAll);
 
-			var tmpCodes = table.TmpCodes;
-
 			for (int index = 0; index < values.Length; index++)
 			{
 				var value = values[index][channel];
@@ -30,7 +28,7 @@ namespace DrhLib.Huffmans
 					}
 				}
 
-				tmpCodes[value].Count++;
+				table.AddCount(value);
 			}
 
 			table.ComputeTable(rle);
@@ -41,8 +39,6 @@ namespace DrhLib.Huffmans
 			table.PrepareTable(rle, resetAll);
 
 			var prevSign = false;
-
-			var tmpCodes = table.TmpCodes;
 
 			for (int index = 0; index < values.Length; index++)
 			{
@@ -82,7 +78,7 @@ namespace DrhLib.Huffmans
 				if (value < 0)
 					value = 256 + value;
 
-				tmpCodes[value].Count++;
+				table.AddCount(value);
 			}
 
 			table.ComputeTable(rle);
