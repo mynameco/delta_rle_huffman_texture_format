@@ -16,7 +16,7 @@ namespace DrhLib.Huffmans
 		{
 			Codes = new List<CodeEntry>(count);
 			TmpCodes = new List<CodeEntry>(count + 1);
-			RleCode = new CodeEntry() { Index = 2001 };
+			RleCode = new CodeEntry() { Index = 1001 };
 
 			Pool = new CodeEntryPool(count);
 
