@@ -10,7 +10,7 @@ namespace DrhLib.Huffmans
 		public static void DecodeH(IBitStreamReader reader, Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, HuffmanTable table, ComputeRle rle)
 		{
 			var rleEntry = table.RleCode;
-			var zeroEntry = table.Codes[0];
+			var zeroEntry = table.ZeroCode;
 
 			var minCodeCount = 0;
 			if (rle != null)
@@ -40,7 +40,7 @@ namespace DrhLib.Huffmans
 		public static void DecodeSH(IBitStreamReader reader, Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, HuffmanTable table, ComputeRle rle)
 		{
 			var rleEntry = table.RleCode;
-			var zeroEntry = table.Codes[0];
+			var zeroEntry = table.ZeroCode;
 
 			var minCodeCount = 0;
 			if (rle != null)

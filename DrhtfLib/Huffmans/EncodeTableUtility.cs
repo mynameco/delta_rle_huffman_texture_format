@@ -10,7 +10,7 @@ namespace DrhLib.Huffmans
 		public static void EncodeH(IBitStreamWriter writer, Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, HuffmanTable table, ComputeRle rle, ref int rleCount)
 		{
 			var rleEntry = table.RleCode;
-			var zeroEntry = table.Codes[0];
+			var zeroEntry = table.ZeroCode;
 
 			for (int index = 0; index < values.Length; index++)
 			{
@@ -33,7 +33,7 @@ namespace DrhLib.Huffmans
 		public static void EncodeSH(IBitStreamWriter writer, Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, HuffmanTable table, ComputeRle rle, ref int rleCount)
 		{
 			var rleEntry = table.RleCode;
-			var zeroEntry = table.Codes[0];
+			var zeroEntry = table.ZeroCode;
 
 			var prevSign = false;
 

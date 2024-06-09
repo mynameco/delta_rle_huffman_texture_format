@@ -6,11 +6,13 @@ namespace DrhLib.Huffmans
 	{
 		public List<CodeEntry> Codes;
 		public List<CodeEntry> TmpCodes;
+
+		private CodeEntryPool pool;
+
+		public CodeEntry ZeroCode => Codes[0];
 		public CodeEntry RleCode { get; private set; }
 
-		public CodeEntryPool Pool;
-
-		public int MinZeroCount = 3;
+		public int MinZeroCount { get; private set; } = 3;
 
 		public HuffmanTable(int count)
 		{
@@ -18,7 +20,7 @@ namespace DrhLib.Huffmans
 			TmpCodes = new List<CodeEntry>(count + 1);
 			RleCode = new CodeEntry() { Index = 1001 };
 
-			Pool = new CodeEntryPool(count);
+			pool = new CodeEntryPool(count);
 
 			for (int index = 0; index < count; index++)
 			{
@@ -57,7 +59,7 @@ namespace DrhLib.Huffmans
 			else
 				CleanupWithoutCount();
 
-			Pool.Reset();
+			pool.Reset();
 
 			TmpCodes.Clear();
 
@@ -86,7 +88,7 @@ namespace DrhLib.Huffmans
 			while (TmpCodes.Count > 1)
 			{
 				var lastIndex = TmpCodes.Count - 1;
-				var entry = Pool.Get();
+				var entry = pool.Get();
 
 				entry.Entry0 = TmpCodes[lastIndex - 1];
 				entry.Entry1 = TmpCodes[lastIndex];
@@ -108,7 +110,7 @@ namespace DrhLib.Huffmans
 			if (rle != null)
 			{
 				var rleEntry = RleCode;
-				var zeroSize = Codes[0].Size;
+				var zeroSize = ZeroCode.Size;
 				var minCode = rleEntry.Size + rle.MinSize;
 				MinZeroCount = minCode / zeroSize;
 			}
