@@ -22,7 +22,7 @@ namespace DrhLib.Compress.Algorithms
 
 			for (int index = 0; index < infos.Length; index++)
 			{
-				infos[index] = new ChannelInfo();
+				infos[index] = new ChannelInfo(256);
 				infos[index].LoadFirstTable(rle);
 			}
 		}

@@ -2,8 +2,13 @@
 {
 	public class CodeEntryPool
 	{
-		private List<CodeEntry> entries = new List<CodeEntry>(258);
+		private List<CodeEntry> entries;
 		private int freeIndex = 0;
+
+		public CodeEntryPool(int count)
+		{
+			entries = new List<CodeEntry>(count);
+		}
 
 		public CodeEntry Get()
 		{

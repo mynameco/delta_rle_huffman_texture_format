@@ -4,23 +4,32 @@ namespace DrhLib.Huffmans
 {
 	public class ChannelInfo
 	{
-		public List<CodeEntry> Codes = new List<CodeEntry>(258);
-		public List<CodeEntry> TmpCodes = new List<CodeEntry>(258);
-		public CodeEntry RleCode = new CodeEntry() { Index = 1001 };
+		public List<CodeEntry> Codes;
+		public List<CodeEntry> TmpCodes;
+		public CodeEntry RleCode;
 
-		public CodeEntryPool Pool = new CodeEntryPool();
+		public CodeEntryPool Pool;
 
 		public int MinZeroCount = 3;
 
-		public void LoadFirstTable(ComputeRle rle)
+		public ChannelInfo(int count)
 		{
-			for (int index = 0; index < 256; index++)
+			Codes = new List<CodeEntry>(count);
+			TmpCodes = new List<CodeEntry>(count + 1);
+			RleCode = new CodeEntry() { Index = 2001 };
+
+			Pool = new CodeEntryPool(count);
+
+			for (int index = 0; index < count; index++)
 			{
 				var code = new CodeEntry();
 				code.Index = index;
 				Codes.Add(code);
 			}
+		}
 
+		public void LoadFirstTable(ComputeRle rle)
+		{
 			UpdateTableUtility.PrepareTable(this, rle);
 
 			var max = 16;
