@@ -25,7 +25,7 @@ namespace DrhLib.Huffmans
 					}
 				}
 
-				var entry = table.Codes[value];
+				var entry = table.GetEntry(value);
 				writer.Write(entry.Code, entry.Size);
 			}
 		}
@@ -67,7 +67,7 @@ namespace DrhLib.Huffmans
 				}
 
 				var bbb = (byte)value;
-				var entry = table.Codes[bbb];
+				var entry = table.GetEntry(bbb);
 				writer.Write(entry.Code, entry.Size);
 			}
 		}

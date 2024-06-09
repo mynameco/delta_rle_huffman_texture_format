@@ -31,6 +31,11 @@ namespace DrhLib.Huffmans
 			}
 		}
 
+		public CodeEntry GetEntry(int index)
+		{
+			return Codes[index];
+		}
+
 		public void Cleanup()
 		{
 			for (int index = 0; index < Codes.Count; index++)
