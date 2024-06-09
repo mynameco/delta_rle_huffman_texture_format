@@ -8,33 +8,33 @@ Original png file length :
 Length : 981 891 ( 52 % )
 
 ----------------------------------------------------------
-Bit length : 6 059 974 , length : 757 496 , part : 6
+Bit length : 6 037 722 , length : 754 715 , part : 2
 Byte total
-Length : 757 501 ( 40 % )
+Length : 754 719 ( 40 % )
 
 Delta count [H] : 71
-Delta count [V] : 120
-Delta count [HV] : 385
+Delta count [V] : 130
+Delta count [HV] : 375
 
-Channel rle count [0] : 26 699
-Channel rle count [1] : 404
-Channel rle count [2] : 27 146
+Channel rle count [0] : 28 630
+Channel rle count [1] : 398
+Channel rle count [2] : 28 499
 
-Channel length [0] : 198 431
-Channel length [1] : 351 798
-Channel length [2] : 206 407
+Channel length [0] : 197 126
+Channel length [1] : 351 713
+Channel length [2] : 205 006
 
-HA [0] : 2
-SHA [0] : 19
-RHA [0] : 43
-RSHA [0] : 485
-H [0] : 2
-SH [0] : 3
-RH [0] : 0
-RSH [0] : 22
+HA [0] : 1
+SHA [0] : 10
+RHA [0] : 46
+RSHA [0] : 488
+H [0] : 0
+SH [0] : 0
+RH [0] : 3
+RSH [0] : 28
 
-HA [1] : 80
-SHA [1] : 333
+HA [1] : 79
+SHA [1] : 334
 RHA [1] : 39
 RSHA [1] : 116
 H [1] : 1
@@ -43,13 +43,13 @@ RH [1] : 0
 RSH [1] : 2
 
 HA [2] : 2
-SHA [2] : 17
-RHA [2] : 28
-RSHA [2] : 509
+SHA [2] : 7
+RHA [2] : 24
+RSHA [2] : 510
 H [2] : 0
 SH [2] : 3
-RH [2] : 0
-RSH [2] : 17
+RH [2] : 1
+RSH [2] : 29
 
 Time seconds : 1
 

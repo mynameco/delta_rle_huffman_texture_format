@@ -7,7 +7,7 @@ namespace DrhLib.Huffmans
 {
 	public static class DecodeTableUtility
 	{
-		public static void DecodeH(IBitStreamReader reader, Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, HuffmanTable table, ComputeRle rle)
+		public static void DecodeH(IBitStreamReader reader, Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, HuffmanTable table, HuffmanTable table2, HuffmanTable table3, ComputeRle rle)
 		{
 			var rleEntry = table.RleCode;
 			var zeroEntry = table.ZeroCode;
@@ -19,14 +19,26 @@ namespace DrhLib.Huffmans
 				minCodeCount = minCode / zeroEntry.Size;
 			}
 
+			var prevRle = false;
+
 			for (int index = 0; index < values.Length; index++)
 			{
-				var code = table.GetCode(reader);
+				CodeEntry code;
+				if (prevRle)
+				{
+					code = table2.GetCode(reader);
+					prevRle = false;
+				}
+				else
+				{
+					code = table.GetCode(reader);
+				}
 
 				if (code == rleEntry)
 				{
 					var count = (int)rle.Read(reader);
 					index += count + minCodeCount;
+					prevRle = true;
 					continue;
 				}
 
@@ -35,7 +47,7 @@ namespace DrhLib.Huffmans
 			}
 		}
 
-		public static void DecodeSH(IBitStreamReader reader, Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, HuffmanTable table, ComputeRle rle)
+		public static void DecodeSH(IBitStreamReader reader, Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, HuffmanTable table, HuffmanTable table2, HuffmanTable table3, ComputeRle rle)
 		{
 			var rleEntry = table.RleCode;
 			var zeroEntry = table.ZeroCode;
@@ -48,15 +60,26 @@ namespace DrhLib.Huffmans
 			}
 
 			var prevSign = false;
+			var prevRle = false;
 
 			for (int index = 0; index < values.Length; index++)
 			{
-				var code = table.GetCode(reader);
+				CodeEntry code;
+				if (prevRle)
+				{
+					code = table2.GetCode(reader);
+					prevRle = false;
+				}
+				else
+				{
+					code = table.GetCode(reader);
+				}
 
 				if (code == rleEntry)
 				{
 					var count = (int)rle.Read(reader);
 					index += count + minCodeCount;
+					prevRle = true;
 					continue;
 				}
 				else if (code.Index == 0)

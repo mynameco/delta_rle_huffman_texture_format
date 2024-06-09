@@ -40,15 +40,19 @@ namespace DrhLib.Compress.Algorithms
 		public void Write(IBitStreamWriter writer, Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, ref int rleCount)
 		{
 			var table = tables[channel];
+			var table2 = tables2[channel];
+			var table3 = tables3[channel];
 
-			EncodeTableUtility.EncodeH(writer, values, channel, lineIndex, kind, table, rle, ref rleCount);
+			EncodeTableUtility.EncodeH(writer, values, channel, lineIndex, kind, table, table2, table3, rle, ref rleCount);
 		}
 
 		public void Read(IBitStreamReader reader, Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind)
 		{
 			var table = tables[channel];
+			var table2 = tables2[channel];
+			var table3 = tables3[channel];
 
-			DecodeTableUtility.DecodeH(reader, values, channel, lineIndex, kind, table, rle);
+			DecodeTableUtility.DecodeH(reader, values, channel, lineIndex, kind, table, table2, table3, rle);
 		}
 
 		public void UpdateTable(Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind)
@@ -58,6 +62,8 @@ namespace DrhLib.Compress.Algorithms
 			var table3 = tables3[channel];
 
 			UpdateTableUtility.UpdateTableH(values, channel, lineIndex, kind, table, true, resetAll, rle);
+			UpdateTableUtility.UpdateTableH(values, channel, lineIndex, kind, table2, false, resetAll, null);
+			UpdateTableUtility.UpdateTableH(values, channel, lineIndex, kind, table3, false, resetAll, rle);
 		}
 	}
 }

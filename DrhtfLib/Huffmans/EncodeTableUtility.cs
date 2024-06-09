@@ -7,10 +7,12 @@ namespace DrhLib.Huffmans
 {
 	public static class EncodeTableUtility
 	{
-		public static void EncodeH(IBitStreamWriter writer, Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, HuffmanTable table, ComputeRle rle, ref int rleCount)
+		public static void EncodeH(IBitStreamWriter writer, Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, HuffmanTable table, HuffmanTable table2, HuffmanTable table3, ComputeRle rle, ref int rleCount)
 		{
 			var rleEntry = table.RleCode;
 			var zeroEntry = table.ZeroCode;
+
+			var prevRle = false;
 
 			for (int index = 0; index < values.Length; index++)
 			{
@@ -21,21 +23,31 @@ namespace DrhLib.Huffmans
 					if (rle != null)
 					{
 						if (rle.Compute(writer, values, channel, ref index, rleEntry, zeroEntry, ref rleCount))
+						{
+							prevRle = true;
 							continue;
+						}
 					}
 				}
 
 				var entry = table.GetEntry(value);
+				if (prevRle)
+				{
+					entry = table2.GetEntry(value);
+					prevRle = false;
+				}
+
 				writer.Write(entry.Code, entry.Size);
 			}
 		}
 
-		public static void EncodeSH(IBitStreamWriter writer, Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, HuffmanTable table, ComputeRle rle, ref int rleCount)
+		public static void EncodeSH(IBitStreamWriter writer, Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, HuffmanTable table, HuffmanTable table2, HuffmanTable table3, ComputeRle rle, ref int rleCount)
 		{
 			var rleEntry = table.RleCode;
 			var zeroEntry = table.ZeroCode;
 
 			var prevSign = false;
+			var prevRle = false;
 
 			for (int index = 0; index < values.Length; index++)
 			{
@@ -47,7 +59,10 @@ namespace DrhLib.Huffmans
 					if (rle != null)
 					{
 						if (rle.Compute(writer, values, channel, ref index, rleEntry, zeroEntry, ref rleCount))
+						{
+							prevRle = true;
 							continue;
+						}
 					}
 				}
 
@@ -70,6 +85,12 @@ namespace DrhLib.Huffmans
 
 				var bbb = (byte)value;
 				var entry = table.GetEntry(bbb);
+				if (prevRle)
+				{
+					entry = table2.GetEntry(bbb);
+					prevRle = false;
+				}
+
 				writer.Write(entry.Code, entry.Size);
 			}
 		}
