@@ -13,12 +13,14 @@ namespace DrhLib.Huffmans
 			var zeroEntry = table.ZeroCode;
 
 			var prevRle = false;
+			var prevZero = false;
 
 			for (int index = 0; index < values.Length; index++)
 			{
 				var value = values[index][channel];
 
-				if (value == 0)
+				if (value == 0 &&
+					!prevZero)
 				{
 					if (rle != null)
 					{
@@ -38,6 +40,11 @@ namespace DrhLib.Huffmans
 				}
 
 				writer.Write(entry.Code, entry.Size);
+
+				if (value == 0)
+					prevZero = true;
+				else
+					prevZero = false;
 			}
 		}
 
@@ -48,13 +55,15 @@ namespace DrhLib.Huffmans
 
 			var prevSign = false;
 			var prevRle = false;
+			var prevZero = false;
 
 			for (int index = 0; index < values.Length; index++)
 			{
 				var bb = values[index][channel];
 				var value = (int)(sbyte)bb;
 
-				if (value == 0)
+				if (value == 0 &&
+					!prevZero)
 				{
 					if (rle != null)
 					{
@@ -92,6 +101,11 @@ namespace DrhLib.Huffmans
 				}
 
 				writer.Write(entry.Code, entry.Size);
+
+				if (value == 0)
+					prevZero = true;
+				else
+					prevZero = false;
 			}
 		}
 	}
