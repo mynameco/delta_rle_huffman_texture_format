@@ -2,6 +2,7 @@
 using DrhLib.Rles;
 using DrhLib.Streams;
 using DrhtfLib.Commons;
+using DrhtfLib.Huffmans;
 
 namespace DrhLib.Compress.Algorithms
 {
@@ -11,19 +12,19 @@ namespace DrhLib.Compress.Algorithms
 		private ComputeRle rle;
 		private bool resetAll;
 
-		private ChannelInfo[] infos;
+		private HuffmanTable[] infos;
 
 		public Algorithm_H(ComputeRle rle, int channelCount, bool resetAll)
 		{
 			this.rle = rle;
 			this.resetAll = resetAll;
 
-			infos = new ChannelInfo[channelCount];
+			infos = new HuffmanTable[channelCount];
 
 			for (int index = 0; index < infos.Length; index++)
 			{
-				infos[index] = new ChannelInfo(256);
-				infos[index].LoadFirstTable(rle);
+				infos[index] = new HuffmanTable(256);
+				HuffmanTableUtility.LoadFirstTable(infos[index], rle);
 			}
 		}
 

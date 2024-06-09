@@ -1,8 +1,6 @@
-﻿using DrhLib.Rles;
-
-namespace DrhLib.Huffmans
+﻿namespace DrhLib.Huffmans
 {
-	public class ChannelInfo
+	public class HuffmanTable
 	{
 		public List<CodeEntry> Codes;
 		public List<CodeEntry> TmpCodes;
@@ -12,7 +10,7 @@ namespace DrhLib.Huffmans
 
 		public int MinZeroCount = 3;
 
-		public ChannelInfo(int count)
+		public HuffmanTable(int count)
 		{
 			Codes = new List<CodeEntry>(count);
 			TmpCodes = new List<CodeEntry>(count + 1);
@@ -25,31 +23,6 @@ namespace DrhLib.Huffmans
 				var code = new CodeEntry();
 				code.Index = index;
 				Codes.Add(code);
-			}
-		}
-
-		public void LoadFirstTable(ComputeRle rle)
-		{
-			UpdateTableUtility.PrepareTable(this, rle);
-
-			var max = 16;
-			var count = 1;
-			for (int index = max; index >= 0; index--)
-			{
-				Codes[index].Count = count;
-				Codes[(byte)-index].Count = count;
-
-				count <<= 1;
-			}
-
-			UpdateTableUtility.ComputeTable(this);
-
-			CodeEntryUtility.UpdateCodes(this);
-
-			for (int index = max; index >= 0; index--)
-			{
-				Codes[index].Count = 0;
-				Codes[(byte)-index].Count = 0;
 			}
 		}
 

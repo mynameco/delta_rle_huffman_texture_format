@@ -7,7 +7,7 @@ namespace DrhLib.Huffmans
 {
 	public static class DecodeTableUtility
 	{
-		public static void DecodeH(IBitStreamReader reader, Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, ChannelInfo info, ComputeRle rle)
+		public static void DecodeH(IBitStreamReader reader, Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, HuffmanTable info, ComputeRle rle)
 		{
 			var rleEntry = info.RleCode;
 			var zeroEntry = info.Codes[0];
@@ -37,7 +37,7 @@ namespace DrhLib.Huffmans
 			}
 		}
 
-		public static void DecodeSH(IBitStreamReader reader, Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, ChannelInfo info, ComputeRle rle)
+		public static void DecodeSH(IBitStreamReader reader, Span<Color32> values, int channel, int lineIndex, AlgorithmKind kind, HuffmanTable info, ComputeRle rle)
 		{
 			var rleEntry = info.RleCode;
 			var zeroEntry = info.Codes[0];
