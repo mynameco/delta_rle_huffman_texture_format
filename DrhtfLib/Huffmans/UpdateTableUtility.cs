@@ -1,7 +1,6 @@
 ﻿using DrhLib.Compress;
 using DrhLib.Rles;
 using DrhtfLib.Commons;
-using DrhtfLib.Huffmans;
 
 namespace DrhLib.Huffmans
 {
@@ -14,7 +13,7 @@ namespace DrhLib.Huffmans
 			else
 				table.CleanupWithoutCount();
 
-			HuffmanTableUtility.PrepareTable(table, rle);
+			table.PrepareTable(rle);
 
 			var tmpCodes = table.TmpCodes;
 
@@ -39,7 +38,7 @@ namespace DrhLib.Huffmans
 				tmpCodes[value].Count++;
 			}
 
-			HuffmanTableUtility.ComputeTable(table);
+			table.ComputeTable();
 
 			if (rle != null)
 			{
@@ -57,7 +56,7 @@ namespace DrhLib.Huffmans
 			else
 				table.CleanupWithoutCount();
 
-			HuffmanTableUtility.PrepareTable(table, rle);
+			table.PrepareTable(rle);
 
 			var prevSign = false;
 
@@ -104,7 +103,7 @@ namespace DrhLib.Huffmans
 				tmpCodes[value].Count++;
 			}
 
-			HuffmanTableUtility.ComputeTable(table);
+			table.ComputeTable();
 
 			if (rle != null)
 			{
