@@ -6,7 +6,7 @@ namespace DrhLib.Huffmans
 	{
 		public List<CodeEntry> Codes;
 		public List<CodeEntry> TmpCodes;
-		public CodeEntry RleCode;
+		public CodeEntry RleCode { get; private set; }
 
 		public CodeEntryPool Pool;
 

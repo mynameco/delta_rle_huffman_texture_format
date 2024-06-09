@@ -46,7 +46,7 @@ namespace DrhLib.Compress.Algorithms
 		{
 			var table = tables[channel];
 
-			UpdateTableUtility.UpdateTableSH(values, channel, lineIndex, kind, table, resetAll, ref table.MinZeroCount, rle);
+			UpdateTableUtility.UpdateTableSH(values, channel, lineIndex, kind, table, resetAll, rle);
 		}
 	}
 }
