@@ -6,7 +6,7 @@ namespace DrhLib.Huffmans
 	public class HuffmanTable
 	{
 		private List<CodeEntry> codes;
-		private List<CodeEntry> TmpCodes;
+		private List<CodeEntry> tmpCodes;
 
 		private CodeEntryPool pool;
 
@@ -18,7 +18,7 @@ namespace DrhLib.Huffmans
 		public HuffmanTable(int count)
 		{
 			codes = new List<CodeEntry>(count);
-			TmpCodes = new List<CodeEntry>(count + 1);
+			tmpCodes = new List<CodeEntry>(count + 1);
 			RleCode = new CodeEntry() { Index = 1001 };
 
 			pool = new CodeEntryPool(count);
@@ -38,7 +38,7 @@ namespace DrhLib.Huffmans
 
 		public CodeEntry GetCode(IBitStreamReader reader)
 		{
-			var entry = TmpCodes[0];
+			var entry = tmpCodes[0];
 
 			while (true)
 			{
@@ -52,7 +52,7 @@ namespace DrhLib.Huffmans
 
 		public void AddCount(int index, int count = 1)
 		{
-			TmpCodes[index].Count += count;
+			tmpCodes[index].Count += count;
 		}
 
 		public void Cleanup()
@@ -86,47 +86,47 @@ namespace DrhLib.Huffmans
 
 			pool.Reset();
 
-			TmpCodes.Clear();
+			tmpCodes.Clear();
 
 			for (int index = 0; index < codes.Count; index++)
 			{
 				var entry = codes[index];
-				TmpCodes.Add(entry);
+				tmpCodes.Add(entry);
 			}
 
 			if (rle != null)
-				TmpCodes.Add(RleCode);
+				tmpCodes.Add(RleCode);
 		}
 
 		public void ComputeTable(ComputeRle rle)
 		{
-			TmpCodes.Sort(SortCodeEntry);
+			tmpCodes.Sort(SortCodeEntry);
 
 			int zeroStartIndex;
-			for (zeroStartIndex = 0; zeroStartIndex < TmpCodes.Count; zeroStartIndex++)
+			for (zeroStartIndex = 0; zeroStartIndex < tmpCodes.Count; zeroStartIndex++)
 			{
-				var count = TmpCodes[zeroStartIndex].Count;
+				var count = tmpCodes[zeroStartIndex].Count;
 				if (count == 0)
 					break;
 			}
 
-			while (TmpCodes.Count > 1)
+			while (tmpCodes.Count > 1)
 			{
-				var lastIndex = TmpCodes.Count - 1;
+				var lastIndex = tmpCodes.Count - 1;
 				var entry = pool.Get();
 
-				entry.Entry0 = TmpCodes[lastIndex - 1];
-				entry.Entry1 = TmpCodes[lastIndex];
+				entry.Entry0 = tmpCodes[lastIndex - 1];
+				entry.Entry1 = tmpCodes[lastIndex];
 
-				TmpCodes.RemoveAt(lastIndex);
-				TmpCodes.RemoveAt(lastIndex - 1);
+				tmpCodes.RemoveAt(lastIndex);
+				tmpCodes.RemoveAt(lastIndex - 1);
 
 				entry.Count = entry.Entry0.Count + entry.Entry1.Count;
 
 				UpLastEntry(entry, zeroStartIndex);
 			}
 
-			var codeEntry = TmpCodes[0];
+			var codeEntry = tmpCodes[0];
 			codeEntry.Code = 0;
 			codeEntry.Size = 0;
 
@@ -178,29 +178,29 @@ namespace DrhLib.Huffmans
 
 		private void UpLastEntry(CodeEntry entry, int zeroStartIndex)
 		{
-			var lastIndex = TmpCodes.Count;
+			var lastIndex = tmpCodes.Count;
 
 			if (entry.Count == 0)
 			{
 				if (zeroStartIndex == lastIndex)
 				{
-					TmpCodes.Insert(lastIndex, entry);
+					tmpCodes.Insert(lastIndex, entry);
 					return;
 				}
 
-				TmpCodes.Insert(zeroStartIndex, entry);
+				tmpCodes.Insert(zeroStartIndex, entry);
 				return;
 			}
 
 			int insertIndex;
 			for (insertIndex = lastIndex; insertIndex >= 1; insertIndex--)
 			{
-				var prevEntry = TmpCodes[insertIndex - 1];
+				var prevEntry = tmpCodes[insertIndex - 1];
 				if (prevEntry.Count > entry.Count)
 					break;
 			}
 
-			TmpCodes.Insert(insertIndex, entry);
+			tmpCodes.Insert(insertIndex, entry);
 		}
 	}
 }
